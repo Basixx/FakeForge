@@ -1,9 +1,13 @@
 package com.romecka.fakeforge.domain.user;
 
+import com.romecka.fakeforge.domain.apikeys.ApiKey;
+import com.romecka.fakeforge.domain.limit.Limit;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,5 +40,13 @@ public class User {
     @Column(unique = true, length = 50)
     @NotNull
     private String emailAddress;
+
+    @OneToOne
+    @JoinColumn(name = "api_key_id")
+    private ApiKey apiKey;
+
+    @OneToOne
+    @JoinColumn(name = "limit_id")
+    private Limit limit;
 
 }

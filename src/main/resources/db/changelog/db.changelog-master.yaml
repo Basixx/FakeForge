@@ -11,3 +11,5 @@ databaseChangeLog:
       file: db/changelog/primarydb/changeset-005-create-api-keys-table.yaml
   - include:
       file: db/changelog/primarydb/changeset-006-create-addresses-table.yaml
+  - include:
+      file: db/changelog/primarydb/changeset-007-add-fk-to-users-table.yml
