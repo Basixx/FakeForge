@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/changeset-002-create-persons-table.yaml
   - include:
       file: db/changelog/changeset-003-create-limits-table.yaml
+  - include:
+      file: db/changelog/changeset-004-create-documents-table.yaml
