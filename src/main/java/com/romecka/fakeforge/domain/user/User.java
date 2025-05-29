@@ -5,28 +5,36 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "users")
-public record User(
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class User {
 
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(unique = true)
-        @NotNull
-        Long id,
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(unique = true)
+    @NotNull
+    private Long id;
 
-        @Column(length = 30)
-        @NotNull
-        String name,
+    @Column(length = 30)
+    @NotNull
+    private String name;
 
-        @Column(length = 30)
-        @NotNull
-        String lastName,
+    @Column(length = 30)
+    @NotNull
+    private String lastName;
 
-        @Column(unique = true, length = 50)
-        @NotNull
-        String emailAddress
-) {
+    @Column(unique = true, length = 50)
+    @NotNull
+    private String emailAddress;
+
 }

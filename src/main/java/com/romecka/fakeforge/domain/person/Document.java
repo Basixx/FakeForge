@@ -5,23 +5,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "documents")
-public record Document(
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Document {
 
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(unique = true)
-        @NotNull
-        Long id,
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(unique = true)
+    @NotNull
+    Long id;
 
-        @NotNull
-        DocumentType type,
+    @NotNull
+    DocumentType type;
 
-        @Column(length = 10)
-        @NotNull
-        String number
-) {
+    @Column(length = 10)
+    @NotNull
+    String number;
+
 }
