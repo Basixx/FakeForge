@@ -46,5 +46,6 @@ public record Person(
 
         @Column(length = 28)
         @NotNull
-        String bankAccountNumber) {
+        String bankAccountNumber
+) {
 }
