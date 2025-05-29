@@ -1,9 +1,13 @@
 package com.romecka.fakeforge.domain.person;
 
+import com.romecka.fakeforge.domain.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,5 +59,17 @@ public class Person {
     @Column(length = 28)
     @NotNull
     String bankAccountNumber;
+
+    @OneToOne
+    @JoinColumn(name = "document_id")
+    Document document;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

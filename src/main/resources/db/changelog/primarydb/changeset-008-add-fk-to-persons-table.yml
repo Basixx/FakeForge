@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008
+      author: barbara
+      changes:
+        - addColumn:
+            tableName: persons
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: document_id
+                  type: BIGINT
+              - column:
+                  name: address_id
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: persons
+            baseColumnNames: document_id
+            referencedTableName: documents
+            referencedColumnNames: document_id
+            constraintName: fk_person_document
+        - addForeignKeyConstraint:
+            baseTableName: persons
+            baseColumnNames: address_id
+            referencedTableName: addresses
+            referencedColumnNames: address_id
+            constraintName: fk_person_address
+        - addForeignKeyConstraint:
+            baseTableName: persons
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: user_id
+            constraintName: fk_person_user
