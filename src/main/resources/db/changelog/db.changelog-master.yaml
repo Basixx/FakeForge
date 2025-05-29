@@ -1,13 +1,13 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset-001-create-users-table.yaml
+      file: db/changelog/primarydb/changeset-001-create-users-table.yaml
   - include:
-      file: db/changelog/changeset-002-create-persons-table.yaml
+      file: db/changelog/primarydb/changeset-002-create-persons-table.yaml
   - include:
-      file: db/changelog/changeset-003-create-limits-table.yaml
+      file: db/changelog/primarydb/changeset-003-create-limits-table.yaml
   - include:
-      file: db/changelog/changeset-004-create-documents-table.yaml
+      file: db/changelog/primarydb/changeset-004-create-documents-table.yaml
   - include:
-      file: db/changelog/changeset-005-create-api-keys-table.yaml
+      file: db/changelog/primarydb/changeset-005-create-api-keys-table.yaml
   - include:
-      file: db/changelog/changeset-006-create-addresses-table.yaml
+      file: db/changelog/primarydb/changeset-006-create-addresses-table.yaml
