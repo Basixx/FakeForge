@@ -27,9 +27,5 @@ public record User(
 
         @Column(length = 50)
         @NotNull
-        String emailAddress,
-
-        @NotNull
-        @Column(unique = true, length = 50)
-        String apiKey) {
+        String emailAddress) {
 }
