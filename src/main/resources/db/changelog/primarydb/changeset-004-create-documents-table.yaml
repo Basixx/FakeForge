@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: documents
             columns:
               - column:
-                  name: id
+                  name: document_id
                   type: BIGINT
                   constraints:
                     primaryKey: true

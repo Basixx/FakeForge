@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: api_keys
             columns:
               - column:
-                  name: id
+                  name: api_key_id
                   type: BIGINT
                   constraints:
                     primaryKey: true
