@@ -28,9 +28,3 @@ databaseChangeLog:
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
-              - column:
-                  name: api_key
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-                    unique: true
