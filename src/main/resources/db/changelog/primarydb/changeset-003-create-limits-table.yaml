@@ -14,7 +14,12 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: api_key
-                  type: VARCHAR(50)
+                  name: daily_limit
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: available_limit
+                  type: int
                   constraints:
                     nullable: false
