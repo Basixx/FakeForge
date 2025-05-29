@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007
+      author: barbara
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: api_key_id
+                  type: BIGINT
+              - column:
+                  name: limit_id
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseColumnNames: api_key_id
+            referencedTableName: api_keys
+            referencedColumnNames: api_key_id
+            constraintName: fk_user_api_key
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseColumnNames: limit_id
+            referencedTableName: limits
+            referencedColumnNames: limit_id
+            constraintName: fk_user_limit
