@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: addresses
             columns:
               - column:
-                  name: id
+                  name: address_id
                   type: BIGINT
                   constraints:
                     primaryKey: true

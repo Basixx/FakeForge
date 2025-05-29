@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: limits
             columns:
               - column:
-                  name: id
+                  name: limit_id
                   type: BIGINT
                   constraints:
                     primaryKey: true

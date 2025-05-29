@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: persons
             columns:
               - column:
-                  name: id
+                  name: person_id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
