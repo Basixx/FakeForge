@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004
+      author: barbara
+      changes:
+        - createTable:
+            tableName: documents
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: type
+                  type: ENUM('ID_CARD', 'PASSPORT')
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
