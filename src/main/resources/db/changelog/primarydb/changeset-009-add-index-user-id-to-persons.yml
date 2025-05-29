@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-index-user-id-to-persons
+      author: basia
+      changes:
+        - createIndex:
+            indexName: idx_persons_user_id
+            tableName: persons
+            columns:
+              - column:
+                  name: user_id

@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,8 @@ import lombok.Setter;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "api_keys")
+@Entity
+@Table(name = "api_keys")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

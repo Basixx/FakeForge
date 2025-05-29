@@ -15,3 +15,5 @@ databaseChangeLog:
       file: db/changelog/primarydb/changeset-007-add-fk-to-users-table.yml
   - include:
       file: db/changelog/primarydb/changeset-008-add-fk-to-persons-table.yml
+  - include:
+      file: db/changelog/primarydb/changeset-009-add-index-user-id-to-persons.yml
