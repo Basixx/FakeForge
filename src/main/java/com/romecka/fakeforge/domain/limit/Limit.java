@@ -27,8 +27,10 @@ public class Limit {
     @NotNull
     Long id;
 
-    @Column(unique = true, length = 50)
     @NotNull
-    String apiKey;
+    int dailyLimit;
+
+    @NotNull
+    int availableLimit;
 
 }
