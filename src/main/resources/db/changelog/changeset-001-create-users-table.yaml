@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: barbara
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email_address
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: api_key
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true

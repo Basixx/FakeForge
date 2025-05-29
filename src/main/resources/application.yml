@@ -7,9 +7,12 @@ spring:
   jpa:
     database: mysql
     show-sql: true
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: none
     open-in-view: true
     properties.hibernate.dialect: org.hibernate.dialect.MySQLDialect
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
 
 management:
   endpoints:
