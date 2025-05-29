@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.limit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "users")
-public record User(
+@Entity(name = "limits")
+public record Limit(
 
         @Id
         @GeneratedValue(strategy = IDENTITY)
@@ -17,16 +17,8 @@ public record User(
         @NotNull
         Long id,
 
-        @Column(length = 30)
-        @NotNull
-        String name,
-
-        @Column(length = 30)
-        @NotNull
-        String lastName,
-
         @Column(unique = true, length = 50)
         @NotNull
-        String emailAddress
+        String apiKey
 ) {
 }
