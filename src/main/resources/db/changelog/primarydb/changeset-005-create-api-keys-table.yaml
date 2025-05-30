@@ -9,12 +9,13 @@ databaseChangeLog:
               - column:
                   name: api_key_id
                   type: BIGINT
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
                     unique: true
               - column:
                   name: api_key
-                  type: VARCHAR(50)
+                  type: VARCHAR(150)
                   constraints:
                     nullable: false

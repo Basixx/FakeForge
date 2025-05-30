@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: add-index-user-id-to-persons
+      id: 009
       author: basia
       changes:
         - createIndex:

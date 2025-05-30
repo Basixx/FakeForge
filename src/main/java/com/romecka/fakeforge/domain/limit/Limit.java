@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,18 +20,18 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Limit {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(unique = true, name = "limit_id")
-    @NotNull
-    Long id;
+    private Long id;
 
     @NotNull
-    int dailyLimit;
+    private int dailyLimit;
 
     @NotNull
-    int availableLimit;
+    private int availableLimit;
 
 }

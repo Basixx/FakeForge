@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: limit_id
                   type: BIGINT
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false

@@ -31,7 +31,6 @@ public class Person {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(unique = true, name = "person_id")
-    @NotNull
     Long id;
 
     @Column(length = 30)
