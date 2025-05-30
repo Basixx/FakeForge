@@ -24,7 +24,6 @@ public class Address {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(unique = true, name = "address_id")
-    @NotNull
     Long id;
 
     @Column(length = 50)

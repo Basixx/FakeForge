@@ -24,7 +24,6 @@ public class Document {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(unique = true, name = "document_id")
-    @NotNull
     Long id;
 
     @NotNull

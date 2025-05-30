@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,16 +20,16 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ApiKey {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(unique = true, name = "api_key_id")
-    @NotNull
-    Long id;
+    private Long id;
 
-    @Column(unique = true, length = 50)
+    @Column(unique = true, length = 150)
     @NotNull
-    String apiKey;
+    private String apiKey;
 
 }
