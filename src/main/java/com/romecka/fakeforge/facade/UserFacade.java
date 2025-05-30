@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.facade;
 
-import com.romecka.fakeforge.domain.user.UserRequestDto;
-import com.romecka.fakeforge.domain.user.UserResponseDto;
+import com.romecka.fakeforge.domain.dto.UserRequestDto;
+import com.romecka.fakeforge.domain.dto.UserResponseDto;
 import com.romecka.fakeforge.mapper.UserMapper;
 import com.romecka.fakeforge.service.UserService;
 import jakarta.transaction.Transactional;

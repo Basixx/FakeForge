@@ -1,7 +1,6 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.romecka.fakeforge.domain.limit.LimitDto;
 
 public record UserResponseDto(String name,
                               String lastName,

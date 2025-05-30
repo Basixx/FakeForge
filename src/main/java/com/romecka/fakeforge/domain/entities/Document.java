@@ -1,5 +1,6 @@
-package com.romecka.fakeforge.domain.person;
+package com.romecka.fakeforge.domain.entities;
 
+import com.romecka.fakeforge.domain.auxiliary.DocumentType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

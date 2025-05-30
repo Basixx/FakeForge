@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.controller;
 
-import com.romecka.fakeforge.domain.user.UserRequestDto;
-import com.romecka.fakeforge.domain.user.UserResponseDto;
+import com.romecka.fakeforge.domain.dto.UserRequestDto;
+import com.romecka.fakeforge.domain.dto.UserResponseDto;
 import com.romecka.fakeforge.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

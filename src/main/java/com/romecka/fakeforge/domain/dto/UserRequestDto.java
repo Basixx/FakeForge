@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.dto;
 
 public record UserRequestDto(String name,
                              String lastName,

@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.facade;
 
-import com.romecka.fakeforge.domain.person.PersonDto;
+import com.romecka.fakeforge.domain.dto.PersonDto;
 import com.romecka.fakeforge.mapper.PersonMapper;
 import com.romecka.fakeforge.service.PersonService;
 import jakarta.transaction.Transactional;

@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.repository;
 
-import com.romecka.fakeforge.domain.person.Person;
+import com.romecka.fakeforge.domain.entities.Person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

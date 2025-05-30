@@ -1,8 +1,5 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.entities;
 
-import com.romecka.fakeforge.domain.apikeys.ApiKey;
-import com.romecka.fakeforge.domain.limit.Limit;
-import com.romecka.fakeforge.domain.person.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

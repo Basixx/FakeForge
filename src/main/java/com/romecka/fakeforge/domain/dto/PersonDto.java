@@ -1,4 +1,6 @@
-package com.romecka.fakeforge.domain.person;
+package com.romecka.fakeforge.domain.dto;
+
+import com.romecka.fakeforge.domain.auxiliary.Gender;
 
 public record PersonDto(String name,
                         String lastName,

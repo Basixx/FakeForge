@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.mapper;
 
-import com.romecka.fakeforge.domain.person.Document;
-import com.romecka.fakeforge.domain.person.DocumentDto;
+import com.romecka.fakeforge.domain.entities.Document;
+import com.romecka.fakeforge.domain.dto.DocumentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
