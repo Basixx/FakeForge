@@ -23,7 +23,7 @@ public class ApiKey {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, name = "api_key_id")
     @NotNull
     Long id;
 

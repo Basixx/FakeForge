@@ -32,7 +32,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, name = "user_id")
     @NotNull
     private Long id;
 

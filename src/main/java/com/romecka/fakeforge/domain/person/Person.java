@@ -30,7 +30,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, name = "person_id")
     @NotNull
     Long id;
 

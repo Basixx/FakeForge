@@ -23,7 +23,7 @@ public class Limit {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, name = "limit_id")
     @NotNull
     Long id;
 
