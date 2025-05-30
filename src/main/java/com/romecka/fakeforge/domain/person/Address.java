@@ -23,7 +23,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, name = "address_id")
     @NotNull
     Long id;
 

@@ -13,6 +13,10 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
     enabled: true
+  data:
+    jdbc:
+      repositories:
+        enabled: false
 
 management:
   endpoints:
