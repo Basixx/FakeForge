@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.limit;
+package com.romecka.fakeforge.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,23 +14,34 @@ import lombok.Setter;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "limits")
+@Table(name = "addresses")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Limit {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true, name = "limit_id")
-    private Long id;
+    @Column(unique = true, name = "address_id")
+    Long id;
+
+    @Column(length = 50)
+    @NotNull
+    String street;
 
     @NotNull
-    private int dailyLimit;
+    int buildingNumber;
 
     @NotNull
-    private int availableLimit;
+    int apartmentNumber;
+
+    @Column(length = 6)
+    @NotNull
+    String postalCode;
+
+    @Column(length = 20)
+    @NotNull
+    String city;
 
 }

@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.person;
+package com.romecka.fakeforge.domain.auxiliary;
 
 public enum DocumentType {
     ID_CARD, PASSPORT

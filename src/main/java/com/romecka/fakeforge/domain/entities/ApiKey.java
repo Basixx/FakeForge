@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.person;
+package com.romecka.fakeforge.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,34 +15,21 @@ import lombok.Setter;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "api_keys")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Address {
+@Builder
+public class ApiKey {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true, name = "address_id")
-    Long id;
+    @Column(unique = true, name = "api_key_id")
+    private Long id;
 
-    @Column(length = 50)
+    @Column(unique = true, length = 150)
     @NotNull
-    String street;
-
-    @NotNull
-    int buildingNumber;
-
-    @NotNull
-    int apartmentNumber;
-
-    @Column(length = 6)
-    @NotNull
-    String postalCode;
-
-    @Column(length = 20)
-    @NotNull
-    String city;
+    private String apiKey;
 
 }

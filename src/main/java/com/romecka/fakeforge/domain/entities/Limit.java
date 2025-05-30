@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.apikeys;
+package com.romecka.fakeforge.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,21 +15,23 @@ import lombok.Setter;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "api_keys")
+@Table(name = "limits")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class ApiKey {
+public class Limit {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(unique = true, name = "api_key_id")
+    @Column(unique = true, name = "limit_id")
     private Long id;
 
-    @Column(unique = true, length = 150)
     @NotNull
-    private String apiKey;
+    private int dailyLimit;
+
+    @NotNull
+    private int availableLimit;
 
 }

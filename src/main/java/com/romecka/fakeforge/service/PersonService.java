@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.service;
 
-import com.romecka.fakeforge.domain.person.Person;
+import com.romecka.fakeforge.domain.entities.Person;
 import com.romecka.fakeforge.repository.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
