@@ -18,9 +18,10 @@ public class UserService {
     private final LimitService limitService;
 
     public User registerUser(User user) {
-        user.setApiKey(apiKeyService.createApiKey());
-        user.setLimit(limitService.createDefaultLimit());
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        apiKeyService.createApiKey(user);
+        limitService.createDefaultLimit(user);
+        return savedUser;
     }
 
 }
