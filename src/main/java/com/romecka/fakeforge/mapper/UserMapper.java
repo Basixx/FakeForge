@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserMapper {
 
-    private final LimitMapper limitMapper;
-
     public User mapToUser(UserRequestDto userRequestDto) {
         return User.builder()
                 .name(userRequestDto.name())
@@ -24,8 +22,7 @@ public class UserMapper {
         return new UserResponseDto(
                 user.getName(),
                 user.getLastName(),
-                user.getEmailAddress(),
-                limitMapper.mapToLimitDto(user.getLimit())
+                user.getEmailAddress()
         );
     }
 

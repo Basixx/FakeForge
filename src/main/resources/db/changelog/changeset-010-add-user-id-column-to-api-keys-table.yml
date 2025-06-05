@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010
+      author: basia
+      changes:
+        - addColumn:
+            tableName: api_keys
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creation_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: api_keys
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: user_id
+            constraintName: fk_api_keys_user
+        - sql:
+            sql: |
+              UPDATE api_keys ak
+              SET user_id = (
+                SELECT u.user_id FROM users u
+                WHERE u.api_key_id = ak.api_key_id
+              );
+        - dropForeignKeyConstraint:
+            baseTableName: users
+            constraintName: fk_user_api_key
+        - dropColumn:
+            columnName: api_key_id
+            tableName: users
