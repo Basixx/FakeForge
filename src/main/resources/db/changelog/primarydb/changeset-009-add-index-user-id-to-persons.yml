@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 009
-      author: basia
+      author: barbara
       changes:
         - createIndex:
             indexName: idx_persons_user_id

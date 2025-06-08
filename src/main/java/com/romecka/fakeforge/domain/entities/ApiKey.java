@@ -1,11 +1,10 @@
 package com.romecka.fakeforge.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -33,7 +32,7 @@ public class ApiKey {
     @Column(unique = true, name = "api_key_id")
     private Long id;
 
-    @Column(unique = true, length = 150)
+    @Column(name = "api_key", unique = true, length = 150)
     @NotNull
     private String apiKey;
 
@@ -41,9 +40,8 @@ public class ApiKey {
     @NotNull
     private LocalDateTime creationDateTime;
 
-    @OneToOne
-    @JsonBackReference
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "apiKey")
+    @JsonIgnore
     private User user;
 
 }

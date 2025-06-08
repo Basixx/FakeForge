@@ -1,6 +1,8 @@
 package com.romecka.fakeforge.service;
 
 import com.romecka.fakeforge.domain.entities.User;
+import com.romecka.fakeforge.domain.factory.ApiKeyFactory;
+import com.romecka.fakeforge.domain.factory.LimitFactory;
 import com.romecka.fakeforge.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +15,14 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final ApiKeyService apiKeyService;
+    private final ApiKeyFactory apiKeyFactory;
 
-    private final LimitService limitService;
+    private final LimitFactory limitFactory;
 
     public User registerUser(User user) {
-        User savedUser = userRepository.save(user);
-        apiKeyService.createApiKey(user);
-        limitService.createDefaultLimit(user);
-        return savedUser;
+        user.setApiKey(apiKeyFactory.createApiKey());
+        user.setLimit(limitFactory.createDefaultLimit());
+        return userRepository.save(user);
     }
 
 }
