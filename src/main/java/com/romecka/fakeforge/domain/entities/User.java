@@ -4,7 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -43,6 +46,14 @@ public class User {
     @Column(unique = true, length = 50)
     @NotNull
     private String emailAddress;
+
+    @OneToOne(cascade = PERSIST)
+    @JoinColumn(name = "api_key_id")
+    private ApiKey apiKey;
+
+    @OneToOne(cascade = PERSIST)
+    @JoinColumn(name = "limit_id")
+    private Limit limit;
 
     @OneToMany(
             cascade = REMOVE,

@@ -5,7 +5,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -32,14 +31,15 @@ public class Limit {
     private Long id;
 
     @NotNull
+    @Column(name = "daily_limit")
     private int dailyLimit;
 
     @NotNull
+    @Column(name = "available_limit")
     private int availableLimit;
 
-    @OneToOne
+    @OneToOne(mappedBy = "limit")
     @JsonBackReference
-    @JoinColumn(name = "user_id")
     private User user;
 
 }
