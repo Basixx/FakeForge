@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LimitService {
 
-    private final LimitProvider limitProvider;
+    private final LimitCollector limitCollector;
 
     public LimitDto getUserLimit(Long userId) {
-        return limitProvider.getLimit(userId);
+        return limitCollector.getLimit(userId);
     }
 
 }

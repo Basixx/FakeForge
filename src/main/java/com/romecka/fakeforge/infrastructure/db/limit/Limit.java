@@ -33,11 +33,13 @@ public class Limit {
 
     @NotNull
     @Column(name = "daily_limit")
-    private int dailyLimit;
+    @Builder.Default
+    private int dailyLimit = 100;
 
     @NotNull
     @Column(name = "available_limit")
-    private int availableLimit;
+    @Builder.Default
+    private int availableLimit = 100;
 
     @OneToOne(mappedBy = "limit")
     @JsonBackReference

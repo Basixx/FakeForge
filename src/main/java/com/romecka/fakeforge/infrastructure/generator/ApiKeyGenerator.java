@@ -1,4 +1,8 @@
-package com.romecka.fakeforge.domain.apikey;
+package com.romecka.fakeforge.infrastructure.generator;
+
+import com.romecka.fakeforge.domain.apikey.ApiKeyProvider;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -6,7 +10,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.UUID;
 
-public class ApiKeyGenerator {
+@Service
+@RequiredArgsConstructor
+public class ApiKeyGenerator implements ApiKeyProvider {
 
     private static String generateApiKey() {
         String key = UUID.randomUUID().toString().replace("-", "");
@@ -15,7 +21,8 @@ public class ApiKeyGenerator {
         return key;
     }
 
-    public static String hashedApiKey(String rawKey) {
+    @Override
+    public String hashedApiKey(String rawKey) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(rawKey.getBytes(StandardCharsets.UTF_8));
@@ -25,7 +32,7 @@ public class ApiKeyGenerator {
         }
     }
 
-    public static String hashedApiKey() {
+    public String hashedApiKey() {
         return hashedApiKey(generateApiKey());
     }
 

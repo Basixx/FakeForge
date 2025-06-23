@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.domain.limit;
 
-public interface LimitProvider {
+public interface LimitCollector {
 
     LimitDto getLimit(Long userId);
 

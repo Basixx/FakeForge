@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserProvider userProvider;
+    private final UserCollector userCollector;
 
     public UserResponseDto registerUser(UserData userData) {
-        return userProvider.saveUser(userData);
+        return userCollector.registerUser(userData);
     }
 
 }

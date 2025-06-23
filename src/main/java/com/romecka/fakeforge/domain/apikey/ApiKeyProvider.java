@@ -2,6 +2,8 @@ package com.romecka.fakeforge.domain.apikey;
 
 public interface ApiKeyProvider {
 
-    ApiKeyDto getApiKey(String rawApiKey);
+    String hashedApiKey(String rawApiKey);
+
+    String hashedApiKey();
 
 }

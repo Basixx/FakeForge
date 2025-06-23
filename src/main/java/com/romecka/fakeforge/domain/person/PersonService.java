@@ -11,12 +11,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PersonService {
 
-    private final PersonProvider personProvider;
+    private final PersonCollector personCollector;
 
     public List<PersonDto> getPersonsFromUser(Long userId,
                                               int page,
                                               int size) {
-        return personProvider.getPersonsOfUser(
+        return personCollector.getPersonsOfUser(
                 userId,
                 page,
                 size

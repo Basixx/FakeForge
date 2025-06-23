@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PersonMapper {
+class PersonMapper {
 
     private final DocumentMapper documentMapper;
 

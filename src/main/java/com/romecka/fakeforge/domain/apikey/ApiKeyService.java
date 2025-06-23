@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ApiKeyService {
 
+    private final ApiKeyCollector apiKeyCollector;
+
     private final ApiKeyProvider apiKeyProvider;
 
     public ApiKeyDto findByRawApiKey(String rawApiKey) {
-        String apiKey = ApiKeyGenerator.hashedApiKey(rawApiKey);
-        return apiKeyProvider.getApiKey(apiKey);
+        String apiKey = apiKeyProvider.hashedApiKey(rawApiKey);
+        return apiKeyCollector.getApiKey(apiKey);
     }
 
 }

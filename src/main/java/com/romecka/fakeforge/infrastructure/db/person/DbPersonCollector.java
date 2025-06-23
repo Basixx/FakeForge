@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
+import com.romecka.fakeforge.domain.person.PersonCollector;
 import com.romecka.fakeforge.domain.person.PersonDto;
-import com.romecka.fakeforge.domain.person.PersonProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PersonFactory implements PersonProvider {
+public class DbPersonCollector implements PersonCollector {
 
     private final PersonRepository personRepository;
+
     private final PersonMapper personMapper;
 
     @Override

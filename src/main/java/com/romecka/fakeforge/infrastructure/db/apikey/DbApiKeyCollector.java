@@ -1,20 +1,22 @@
 package com.romecka.fakeforge.infrastructure.db.apikey;
 
+import com.romecka.fakeforge.domain.apikey.ApiKeyCollector;
 import com.romecka.fakeforge.domain.apikey.ApiKeyDto;
-import com.romecka.fakeforge.domain.apikey.ApiKeyProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ApiKeyFactory implements ApiKeyProvider {
+public class DbApiKeyCollector implements ApiKeyCollector {
 
     private final ApiKeyRepository apiKeyRepository;
 
+    private final ApiKeyMapper apiKeyMapper;
+
     @Override
     public ApiKeyDto getApiKey(String rawApiKey) {
-        ApiKey ak = apiKeyRepository.findByApiKey(rawApiKey).orElseThrow();
-        return new ApiKeyDto(ak.getApiKey(), ak.getUser().getId());
+        ApiKey apiKey = apiKeyRepository.findByApiKey(rawApiKey).orElseThrow();
+        return apiKeyMapper.mapToApiKeyDto(apiKey);
     }
 
 }

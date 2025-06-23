@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DocumentMapper {
+class DocumentMapper {
 
     public DocumentDto mapToDocumentDto(Document document) {
         return new DocumentDto(document.getType(), document.getNumber());
