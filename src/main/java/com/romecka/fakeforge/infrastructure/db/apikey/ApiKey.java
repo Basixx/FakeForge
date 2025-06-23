@@ -1,6 +1,7 @@
 package com.romecka.fakeforge.infrastructure.db.apikey;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.romecka.fakeforge.domain.apikey.ApiKeyEntity;
 import com.romecka.fakeforge.infrastructure.db.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +27,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @Builder
-public class ApiKey {
+public class ApiKey implements ApiKeyEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

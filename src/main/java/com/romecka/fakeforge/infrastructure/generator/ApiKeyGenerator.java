@@ -1,25 +1,20 @@
 package com.romecka.fakeforge.infrastructure.generator;
 
 import com.romecka.fakeforge.domain.apikey.ApiKeyProvider;
+import com.romecka.fakeforge.infrastructure.db.apikey.ApiKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ApiKeyGenerator implements ApiKeyProvider {
-
-    private static String generateApiKey() {
-        String key = UUID.randomUUID().toString().replace("-", "");
-//        TODO usunąć prntln
-        System.out.println("Key: " + key);
-        return key;
-    }
 
     @Override
     public String hashedApiKey(String rawKey) {
@@ -32,8 +27,18 @@ public class ApiKeyGenerator implements ApiKeyProvider {
         }
     }
 
-    public String hashedApiKey() {
-        return hashedApiKey(generateApiKey());
+    public ApiKey generateApiKey() {
+        return ApiKey.builder()
+                .apiKey(hashedApiKey(generateKey()))
+                .creationDateTime(LocalDateTime.now())
+                .build();
+    }
+
+    private static String generateKey() {
+        String key = UUID.randomUUID().toString().replace("-", "");
+//        TODO usunąć prntln
+        System.out.println("Key: " + key);
+        return key;
     }
 
 }
