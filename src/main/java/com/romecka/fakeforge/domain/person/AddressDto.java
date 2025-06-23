@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.person;
 
 public record AddressDto(String street,
                          int buildingNumber,

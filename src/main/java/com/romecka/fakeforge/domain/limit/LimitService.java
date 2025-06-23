@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.domain.limit;
 
-import com.romecka.fakeforge.infrastructure.db.limit.LimitRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,12 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LimitService {
 
-    private final LimitRepository limitRepository;
-
-    private final LimitMapper limitMapper;
+    private final LimitProvider limitProvider;
 
     public LimitDto getUserLimit(Long userId) {
-        return limitMapper.mapToLimitDto(limitRepository.findByUserId(userId).orElseThrow());
+        return limitProvider.getLimit(userId);
     }
 
 }

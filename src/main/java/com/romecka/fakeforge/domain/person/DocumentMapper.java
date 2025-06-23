@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.person;
 
 import com.romecka.fakeforge.infrastructure.db.user.Document;
 import lombok.RequiredArgsConstructor;

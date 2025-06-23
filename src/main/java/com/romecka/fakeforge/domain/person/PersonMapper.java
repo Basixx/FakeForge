@@ -1,7 +1,5 @@
 package com.romecka.fakeforge.domain.person;
 
-import com.romecka.fakeforge.domain.user.AddressMapper;
-import com.romecka.fakeforge.domain.user.DocumentMapper;
 import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

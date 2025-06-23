@@ -1,9 +1,5 @@
 package com.romecka.fakeforge.domain.person;
 
-import com.romecka.fakeforge.domain.user.AddressDto;
-import com.romecka.fakeforge.domain.user.DocumentDto;
-import com.romecka.fakeforge.domain.user.Gender;
-
 public record PersonDto(String name,
                         String lastName,
                         String emailAddress,
