@@ -9,6 +9,6 @@ public record PersonDto(String name,
                         String citizenship,
                         String bankAccountNumber,
                         DocumentDto documentDto,
-                        AddressDto addressDto) implements Person {
+                        AddressDto addressDto) {
 
 }

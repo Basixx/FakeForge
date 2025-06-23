@@ -1,12 +1,13 @@
-package com.romecka.fakeforge.domain.person;
+package com.romecka.fakeforge.infrastructure.db.person;
 
+import com.romecka.fakeforge.domain.person.AddressDto;
 import com.romecka.fakeforge.infrastructure.db.user.Address;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AddressMapper {
+class AddressMapper {
 
     public AddressDto mapToAddressDto(Address address) {
         return new AddressDto(

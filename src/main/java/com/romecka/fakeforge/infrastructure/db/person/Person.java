@@ -29,7 +29,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PersonEntity {
+public class Person {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
