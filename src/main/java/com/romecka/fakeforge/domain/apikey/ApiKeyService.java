@@ -1,5 +1,6 @@
 package com.romecka.fakeforge.domain.apikey;
 
+import com.romecka.fakeforge.application.service.exception.UnauthorizedException;
 import com.romecka.fakeforge.infrastructure.db.apikey.ApiKey;
 import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyRepository;
 import jakarta.transaction.Transactional;
@@ -15,9 +16,13 @@ public class ApiKeyService {
 
     private final ApiKeyRepository apiKeyRepository;
 
-    public Optional<ApiKey> findByRawApiKey(String rawApiKey) {
+    public ApiKeyDto findByRawApiKey(String rawApiKey) {
         String apiKey = ApiKeyGenerator.hashedApiKey(rawApiKey);
-        return apiKeyRepository.findByApiKey(apiKey);
+        Optional<ApiKey> ak = apiKeyRepository.findByApiKey(apiKey);
+        if (ak.isEmpty()) {
+            throw new UnauthorizedException("Invalid API key");
+        }
+        return new ApiKeyDto(ak.get().getApiKey(), ak.get().getUser().getId());
     }
 
 }

@@ -1,8 +1,8 @@
 package com.romecka.fakeforge.application.api.limit;
 
 import com.romecka.fakeforge.application.config.CurrentUser;
-import com.romecka.fakeforge.domain.limit.LimitFacade;
-import com.romecka.fakeforge.infrastructure.db.user.User;
+import com.romecka.fakeforge.domain.limit.LimitDto;
+import com.romecka.fakeforge.domain.limit.LimitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,12 +14,12 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class LimitController {
 
-    private final LimitFacade limitFacade;
+    private final LimitService limitService;
 
     @GetMapping(value = "/users/limit")
     @ResponseStatus(OK)
-    public LimitDto getUserLimit(@CurrentUser User user) {
-        return limitFacade.getUserLimit(user.getId());
+    public LimitDto getUserLimit(@CurrentUser Long userId) {
+        return limitService.getUserLimit(userId);
     }
 
 }

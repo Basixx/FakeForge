@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.domain.person;
 
-import com.romecka.fakeforge.infrastructure.db.person.Person;
 import com.romecka.fakeforge.infrastructure.db.person.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +14,17 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    public List<Person> getPersonsFromUser(Long userId,
-                                           int page,
-                                           int size) {
-        return personRepository.findByUserId(
-                userId,
-                page,
-                size
+    private final PersonMapper personMapper;
+
+    public List<PersonDto> getPersonsFromUser(Long userId,
+                                              int page,
+                                              int size) {
+        return personMapper.mapToPersonDtoList(
+                personRepository.findByUserId(
+                        userId,
+                        page,
+                        size
+                )
         );
     }
 

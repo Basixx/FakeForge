@@ -1,7 +1,7 @@
-package com.romecka.fakeforge.application.api.person;
+package com.romecka.fakeforge.domain.person;
 
-import com.romecka.fakeforge.application.api.user.AddressDto;
-import com.romecka.fakeforge.application.api.user.DocumentDto;
+import com.romecka.fakeforge.domain.user.AddressDto;
+import com.romecka.fakeforge.domain.user.DocumentDto;
 import com.romecka.fakeforge.domain.user.Gender;
 
 public record PersonDto(String name,
@@ -13,6 +13,6 @@ public record PersonDto(String name,
                         String citizenship,
                         String bankAccountNumber,
                         DocumentDto documentDto,
-                        AddressDto addressDto) {
+                        AddressDto addressDto) implements Person {
 
 }

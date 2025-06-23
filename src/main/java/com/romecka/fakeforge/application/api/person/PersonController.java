@@ -1,8 +1,8 @@
 package com.romecka.fakeforge.application.api.person;
 
 import com.romecka.fakeforge.application.config.CurrentUser;
-import com.romecka.fakeforge.domain.person.PersonFacade;
-import com.romecka.fakeforge.infrastructure.db.user.User;
+import com.romecka.fakeforge.domain.person.PersonDto;
+import com.romecka.fakeforge.domain.person.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,14 +17,14 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class PersonController {
 
-    private final PersonFacade personFacade;
+    private final PersonService personService;
 
     @GetMapping(value = "/users/persons")
     @ResponseStatus(OK)
-    public List<PersonDto> getPersonsByUser(@CurrentUser User user,
+    public List<PersonDto> getPersonsByUser(@CurrentUser Long userId,
                                             @RequestParam(defaultValue = "0") int page,
                                             @RequestParam(defaultValue = "10") int size) {
-        return personFacade.getPersonsByUserId(user.getId(), page, size);
+        return personService.getPersonsFromUser(userId, page, size);
     }
 
 }

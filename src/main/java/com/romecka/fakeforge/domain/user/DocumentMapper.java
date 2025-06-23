@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.domain.user;
 
-import com.romecka.fakeforge.application.api.user.DocumentDto;
 import com.romecka.fakeforge.infrastructure.db.user.Document;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

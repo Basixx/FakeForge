@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.application.config;
 
-import com.romecka.fakeforge.infrastructure.db.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
@@ -16,7 +15,7 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return parameter.getParameterAnnotation(CurrentUser.class) != null
-                && parameter.getParameterType().equals(User.class);
+                && parameter.getParameterType().equals(Long.class);
     }
 
     @Override
@@ -25,7 +24,7 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
                                   NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-        return request.getAttribute("currentUser");
+        return request.getAttribute("currentUserId");
     }
 
 }

@@ -1,9 +1,8 @@
 package com.romecka.fakeforge.domain.person;
 
-import com.romecka.fakeforge.application.api.person.PersonDto;
 import com.romecka.fakeforge.domain.user.AddressMapper;
 import com.romecka.fakeforge.domain.user.DocumentMapper;
-import com.romecka.fakeforge.infrastructure.db.person.Person;
+import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,23 +16,23 @@ public class PersonMapper {
 
     private final AddressMapper addressMapper;
 
-    public PersonDto mapToPersonDto(Person person) {
+    public PersonDto mapToPersonDto(PersonEntity personEntity) {
         return new PersonDto(
-                person.getName(),
-                person.getLastName(),
-                person.getEmailAddress(),
-                person.getPhoneNumber(),
-                person.getPersonalId(),
-                person.getGender(),
-                person.getCitizenship(),
-                person.getBankAccountNumber(),
-                documentMapper.mapToDocumentDto(person.getDocument()),
-                addressMapper.mapToAddressDto(person.getAddress())
+                personEntity.getName(),
+                personEntity.getLastName(),
+                personEntity.getEmailAddress(),
+                personEntity.getPhoneNumber(),
+                personEntity.getPersonalId(),
+                personEntity.getGender(),
+                personEntity.getCitizenship(),
+                personEntity.getBankAccountNumber(),
+                documentMapper.mapToDocumentDto(personEntity.getDocument()),
+                addressMapper.mapToAddressDto(personEntity.getAddress())
         );
     }
 
-    public List<PersonDto> mapToPersonDtoList(List<Person> persons) {
-        return persons.stream()
+    public List<PersonDto> mapToPersonDtoList(List<PersonEntity> personEntities) {
+        return personEntities.stream()
                 .map(this::mapToPersonDto)
                 .toList();
     }

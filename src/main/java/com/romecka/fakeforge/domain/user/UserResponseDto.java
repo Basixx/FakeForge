@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.application.api.user;
+package com.romecka.fakeforge.domain.user;
 
 public record UserResponseDto(String name,
                               String lastName,

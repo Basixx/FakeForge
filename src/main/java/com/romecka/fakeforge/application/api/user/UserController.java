@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.application.api.user;
 
-import com.romecka.fakeforge.domain.user.UserFacade;
+import com.romecka.fakeforge.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserFacade userFacade;
+    private final UserService userService;
 
     @PostMapping(value = "users/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDto registerClient(@RequestBody UserRequestDto userRequestDto) {
-        return userFacade.registerUser(userRequestDto);
+    public UserResponse registerClient(@RequestBody UserRequest userRequest) {
+        return UserResponse.fromUser(userService.registerUser(userRequest));
     }
 
 }

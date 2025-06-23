@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.domain.limit;
 
-import com.romecka.fakeforge.application.api.limit.LimitDto;
 import com.romecka.fakeforge.infrastructure.db.limit.Limit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
