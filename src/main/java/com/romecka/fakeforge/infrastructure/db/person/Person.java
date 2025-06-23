@@ -1,8 +1,8 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
+import com.romecka.fakeforge.domain.user.Gender;
 import com.romecka.fakeforge.infrastructure.db.user.Address;
 import com.romecka.fakeforge.infrastructure.db.user.Document;
-import com.romecka.fakeforge.infrastructure.db.user.Gender;
 import com.romecka.fakeforge.infrastructure.db.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

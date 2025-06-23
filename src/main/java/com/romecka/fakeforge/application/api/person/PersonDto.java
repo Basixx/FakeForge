@@ -2,7 +2,7 @@ package com.romecka.fakeforge.application.api.person;
 
 import com.romecka.fakeforge.application.api.user.AddressDto;
 import com.romecka.fakeforge.application.api.user.DocumentDto;
-import com.romecka.fakeforge.infrastructure.db.user.Gender;
+import com.romecka.fakeforge.domain.user.Gender;
 
 public record PersonDto(String name,
                         String lastName,
