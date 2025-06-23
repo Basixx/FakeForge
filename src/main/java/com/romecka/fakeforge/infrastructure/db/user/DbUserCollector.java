@@ -1,6 +1,7 @@
 package com.romecka.fakeforge.infrastructure.db.user;
 
 import com.romecka.fakeforge.domain.apikey.ApiKeyProvider;
+import com.romecka.fakeforge.domain.limit.LimitProvider;
 import com.romecka.fakeforge.domain.user.UserCollector;
 import com.romecka.fakeforge.domain.user.UserData;
 import com.romecka.fakeforge.domain.user.UserResponseDto;
@@ -8,8 +9,6 @@ import com.romecka.fakeforge.infrastructure.db.apikey.ApiKey;
 import com.romecka.fakeforge.infrastructure.db.limit.Limit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -21,12 +20,11 @@ public class DbUserCollector implements UserCollector {
 
     private final ApiKeyProvider apiKeyProvider;
 
+    private final LimitProvider limitProvider;
+
     public UserResponseDto registerUser(UserData userData) {
-        ApiKey apiKey = ApiKey.builder()
-                .apiKey(apiKeyProvider.hashedApiKey())
-                .creationDateTime(LocalDateTime.now())
-                .build();
-        Limit limit = Limit.builder().build();
+        ApiKey apiKey = (ApiKey) apiKeyProvider.generateApiKey();
+        Limit limit = (Limit) limitProvider.generateDefaultLimit();
         User user = User.builder()
                 .name(userData.name())
                 .lastName(userData.lastName())

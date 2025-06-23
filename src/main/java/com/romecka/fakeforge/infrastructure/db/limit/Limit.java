@@ -1,6 +1,7 @@
 package com.romecka.fakeforge.infrastructure.db.limit;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.romecka.fakeforge.domain.limit.LimitEntity;
 import com.romecka.fakeforge.infrastructure.db.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +25,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @Builder
-public class Limit {
+public class Limit implements LimitEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
