@@ -1,11 +1,15 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
 import com.romecka.fakeforge.domain.person.Gender;
+import com.romecka.fakeforge.domain.person.PersonEntity;
 import com.romecka.fakeforge.infrastructure.db.user.Address;
 import com.romecka.fakeforge.infrastructure.db.user.Document;
 import com.romecka.fakeforge.infrastructure.db.user.User;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
@@ -15,6 +19,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +34,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Person {
+@Builder
+public class Person implements PersonEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -56,6 +62,7 @@ public class Person {
     @NotNull
     String personalId;
 
+    @Enumerated(EnumType.STRING)
     @NotNull
     Gender gender;
 
@@ -67,15 +74,15 @@ public class Person {
     @NotNull
     String bankAccountNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "document_id")
     Document document;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     Address address;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 

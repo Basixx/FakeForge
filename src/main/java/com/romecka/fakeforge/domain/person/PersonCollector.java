@@ -8,4 +8,6 @@ public interface PersonCollector {
                                      int page,
                                      int size);
 
+    PersonDto createPerson(Long userId);
+
 }
