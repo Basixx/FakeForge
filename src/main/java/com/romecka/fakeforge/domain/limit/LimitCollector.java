@@ -4,4 +4,6 @@ public interface LimitCollector {
 
     LimitDto getLimit(Long userId);
 
+    void useLimit(Long userId);
+
 }

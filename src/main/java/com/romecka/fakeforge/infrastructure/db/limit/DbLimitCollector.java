@@ -19,4 +19,11 @@ public class DbLimitCollector implements LimitCollector {
         return limitMapper.mapToLimitDto(limit);
     }
 
+    @Override
+    public void useLimit(Long userId) {
+        Limit limit = limitRepository.findByUserId(userId).orElseThrow();
+        limit.setAvailableLimit(limit.getAvailableLimit() - 1);
+        limitRepository.save(limit);
+    }
+
 }
