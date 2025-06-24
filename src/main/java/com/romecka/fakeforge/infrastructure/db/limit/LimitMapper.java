@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class LimitMapper {
 
-    public LimitDto mapToLimitDto(Limit limit) {
+    public LimitDto mapToLimitDto(LimitEntity limit) {
         return new LimitDto(limit.dailyLimit(), limit.availableLimit());
     }
 

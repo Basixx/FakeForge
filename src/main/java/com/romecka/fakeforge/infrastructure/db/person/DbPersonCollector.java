@@ -30,7 +30,7 @@ public class DbPersonCollector implements PersonCollector {
 
     @Override
     public PersonDto createPerson(Long userId) {
-        Person person = (Person) personProvider.generateRandomPerson();
+        PersonEntity person = (PersonEntity) personProvider.generateRandomPerson();
         person.user(userRepository.findById(userId).orElseThrow());
 
         return personMapper.mapToPersonDto(personRepository.save(person));

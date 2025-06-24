@@ -3,9 +3,9 @@ package com.romecka.fakeforge.infrastructure.generator;
 import com.romecka.fakeforge.domain.person.DocumentType;
 import com.romecka.fakeforge.domain.person.Gender;
 import com.romecka.fakeforge.domain.person.PersonProvider;
-import com.romecka.fakeforge.infrastructure.db.person.Person;
-import com.romecka.fakeforge.infrastructure.db.user.Address;
-import com.romecka.fakeforge.infrastructure.db.user.Document;
+import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
+import com.romecka.fakeforge.infrastructure.db.person.AddressEntity;
+import com.romecka.fakeforge.infrastructure.db.person.DocumentEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PersonGenerator implements PersonProvider {
 
-    public Person generateRandomPerson() {
-        return new Person()
+    public PersonEntity generateRandomPerson() {
+        return new PersonEntity()
                 .name("aaa")
                 .lastName("bbb")
                 .emailAddress("<EMAIL>")
@@ -23,13 +23,13 @@ public class PersonGenerator implements PersonProvider {
                 .gender(Gender.FEMALE)
                 .citizenship("PL")
                 .bankAccountNumber("1232323232323")
-                .address(new Address()
+                .address(new AddressEntity()
                         .street("street")
                         .buildingNumber(1)
                         .apartmentNumber(12)
                         .postalCode("12-345")
                         .city("city"))
-                .document(new Document()
+                .document(new DocumentEntity()
                         .type(DocumentType.ID_CARD)
                         .number("1234569"));
     }
