@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.infrastructure.db.limit;
 
+import com.romecka.fakeforge.domain.limit.Limit;
 import com.romecka.fakeforge.domain.limit.LimitCollector;
-import com.romecka.fakeforge.domain.limit.LimitDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,9 @@ public class DbLimitCollector implements LimitCollector {
 
     private final LimitRepository limitRepository;
 
-    private final LimitMapper limitMapper;
-
     @Override
-    public LimitDto getLimit(Long userId) {
-        LimitEntity limit = limitRepository.findByUserId(userId).orElseThrow();
-        return limitMapper.mapToLimitDto(limit);
+    public Limit getLimit(Long userId) {
+        return limitRepository.findByUserId(userId).orElseThrow();
     }
 
     @Override
