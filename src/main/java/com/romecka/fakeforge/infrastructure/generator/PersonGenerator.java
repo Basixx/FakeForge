@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class PersonGenerator implements PersonProvider {
 
     public Person generateRandomPerson() {
-        return Person.builder()
+        return new Person()
                 .name("aaa")
                 .lastName("bbb")
                 .emailAddress("<EMAIL>")
@@ -23,18 +23,15 @@ public class PersonGenerator implements PersonProvider {
                 .gender(Gender.FEMALE)
                 .citizenship("PL")
                 .bankAccountNumber("1232323232323")
-                .address(Address.builder()
+                .address(new Address()
                         .street("street")
                         .buildingNumber(1)
                         .apartmentNumber(12)
                         .postalCode("12-345")
-                        .city("city")
-                        .build())
-                .document(Document.builder()
+                        .city("city"))
+                .document(new Document()
                         .type(DocumentType.ID_CARD)
-                        .number("1234569")
-                        .build())
-                .build();
+                        .number("1234569"));
     }
 
 }

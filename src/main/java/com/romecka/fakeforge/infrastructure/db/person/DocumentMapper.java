@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 class DocumentMapper {
 
     public DocumentDto mapToDocumentDto(Document document) {
-        return new DocumentDto(document.getType(), document.getNumber());
+        return new DocumentDto(document.type(), document.number());
     }
 
 }

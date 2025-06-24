@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 class LimitMapper {
 
     public LimitDto mapToLimitDto(Limit limit) {
-        return new LimitDto(limit.getDailyLimit(), limit.getAvailableLimit());
+        return new LimitDto(limit.dailyLimit(), limit.availableLimit());
     }
 
 }

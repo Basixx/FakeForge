@@ -22,7 +22,7 @@ public class DbLimitCollector implements LimitCollector {
     @Override
     public void useLimit(Long userId) {
         Limit limit = limitRepository.findByUserId(userId).orElseThrow();
-        limit.setAvailableLimit(limit.getAvailableLimit() - 1);
+        limit.availableLimit(limit.availableLimit() - 1);
         limitRepository.save(limit);
     }
 
