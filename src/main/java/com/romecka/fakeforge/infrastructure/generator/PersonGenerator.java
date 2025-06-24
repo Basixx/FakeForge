@@ -3,7 +3,7 @@ package com.romecka.fakeforge.infrastructure.generator;
 import com.romecka.fakeforge.domain.person.DocumentType;
 import com.romecka.fakeforge.domain.person.Gender;
 import com.romecka.fakeforge.domain.person.PersonProvider;
-import com.romecka.fakeforge.infrastructure.db.person.Person;
+import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import com.romecka.fakeforge.infrastructure.db.user.Address;
 import com.romecka.fakeforge.infrastructure.db.user.Document;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PersonGenerator implements PersonProvider {
 
-    public Person generateRandomPerson() {
-        return new Person()
+    public PersonEntity generateRandomPerson() {
+        return new PersonEntity()
                 .name("aaa")
                 .lastName("bbb")
                 .emailAddress("<EMAIL>")

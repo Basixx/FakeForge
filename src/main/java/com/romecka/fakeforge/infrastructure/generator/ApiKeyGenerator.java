@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.infrastructure.generator;
 
 import com.romecka.fakeforge.domain.apikey.ApiKeyProvider;
-import com.romecka.fakeforge.infrastructure.db.apikey.ApiKey;
+import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +27,8 @@ public class ApiKeyGenerator implements ApiKeyProvider {
         }
     }
 
-    public ApiKey generateApiKey() {
-        return new ApiKey()
+    public ApiKeyEntity generateApiKey() {
+        return new ApiKeyEntity()
                 .apiKey(hashedApiKey(generateKey()))
                 .creationDateTime(LocalDateTime.now());
     }

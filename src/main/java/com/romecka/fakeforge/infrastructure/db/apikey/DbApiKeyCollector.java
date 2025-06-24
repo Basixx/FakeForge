@@ -15,8 +15,8 @@ public class DbApiKeyCollector implements ApiKeyCollector {
 
     @Override
     public ApiKeyDto getApiKey(String rawApiKey) {
-        ApiKey apiKey = apiKeyRepository.findByApiKey(rawApiKey).orElseThrow();
-        return apiKeyMapper.mapToApiKeyDto(apiKey);
+        ApiKeyEntity apiKeyEntity = apiKeyRepository.findByApiKey(rawApiKey).orElseThrow();
+        return apiKeyMapper.mapToApiKeyDto(apiKeyEntity);
     }
 
 }

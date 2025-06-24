@@ -4,6 +4,6 @@ public interface ApiKeyProvider {
 
     String hashedApiKey(String rawApiKey);
 
-    ApiKeyEntity generateApiKey();
+    ApiKey generateApiKey();
 
 }

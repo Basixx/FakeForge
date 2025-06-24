@@ -1,5 +1,5 @@
 package com.romecka.fakeforge.domain.apikey;
 
-public interface ApiKeyEntity {
+public interface ApiKey {
 
 }
