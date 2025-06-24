@@ -1,23 +1,23 @@
 package com.romecka.fakeforge.infrastructure.db.limit;
 
 import com.romecka.fakeforge.domain.limit.Limit;
-import com.romecka.fakeforge.domain.limit.LimitCollector;
+import com.romecka.fakeforge.domain.limit.Limits;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DbLimitCollector implements LimitCollector {
+public class LimitStorage implements Limits {
 
     private final LimitRepository limitRepository;
 
     @Override
-    public Limit getLimit(Long userId) {
+    public Limit getLimit(long userId) {
         return limitRepository.findByUserId(userId).orElseThrow();
     }
 
     @Override
-    public void useLimit(Long userId) {
+    public void useLimit(long userId) {
         LimitEntity limit = limitRepository.findByUserId(userId).orElseThrow();
         limit.availableLimit(limit.availableLimit() - 1);
         limitRepository.save(limit);

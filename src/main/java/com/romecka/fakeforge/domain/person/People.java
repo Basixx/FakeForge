@@ -2,12 +2,12 @@ package com.romecka.fakeforge.domain.person;
 
 import java.util.List;
 
-public interface PersonCollector {
+public interface People {
 
-    List<Person> getPersonsOfUser(Long userId,
+    List<Person> getPersonsOfUser(long userId,
                                   int page,
                                   int size);
 
-    Person createPerson(Long userId);
+    Person createPerson(long userId);
 
 }
