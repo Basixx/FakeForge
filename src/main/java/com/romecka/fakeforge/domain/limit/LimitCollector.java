@@ -2,7 +2,7 @@ package com.romecka.fakeforge.domain.limit;
 
 public interface LimitCollector {
 
-    LimitDto getLimit(Long userId);
+    Limit getLimit(Long userId);
 
     void useLimit(Long userId);
 

@@ -11,7 +11,7 @@ public class LimitService {
 
     private final LimitCollector limitCollector;
 
-    public LimitDto getUserLimit(Long userId) {
+    public Limit getUserLimit(Long userId) {
         return limitCollector.getLimit(userId);
     }
 
