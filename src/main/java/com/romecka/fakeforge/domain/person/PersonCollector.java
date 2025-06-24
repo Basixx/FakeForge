@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface PersonCollector {
 
-    List<PersonDto> getPersonsOfUser(Long userId,
-                                     int page,
-                                     int size);
+    List<Person> getPersonsOfUser(Long userId,
+                                  int page,
+                                  int size);
 
-    PersonDto createPerson(Long userId);
+    Person createPerson(Long userId);
 
 }
