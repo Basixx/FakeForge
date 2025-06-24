@@ -1,8 +1,8 @@
 package com.romecka.fakeforge.infrastructure.db.apikey;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.romecka.fakeforge.domain.apikey.ApiKey;
-import com.romecka.fakeforge.infrastructure.db.user.UserEntity;
+import com.romecka.fakeforge.domain.apikey.ApiKeyEntity;
+import com.romecka.fakeforge.infrastructure.db.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @Entity
 @Table(name = "api_keys")
-public class ApiKeyEntity implements ApiKey {
+public class ApiKey implements ApiKeyEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -36,6 +36,6 @@ public class ApiKeyEntity implements ApiKey {
 
     @OneToOne(mappedBy = "apiKey")
     @JsonIgnore
-    private UserEntity userEntity;
+    private User user;
 
 }

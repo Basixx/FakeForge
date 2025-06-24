@@ -24,16 +24,16 @@ public class DbPersonCollector implements PersonCollector {
     @Override
     public List<PersonDto> getPersonsOfUser(Long userId, int page, int size) {
         return personMapper.mapToPersonDtoList(
-                personRepository.findByUserEntityId(userId, page, size)
+                personRepository.findByUserId(userId, page, size)
         );
     }
 
     @Override
     public PersonDto createPerson(Long userId) {
-        PersonEntity personEntity = (PersonEntity) personProvider.generateRandomPerson();
-        personEntity.userEntity(userRepository.findById(userId).orElseThrow());
+        Person person = (Person) personProvider.generateRandomPerson();
+        person.user(userRepository.findById(userId).orElseThrow());
 
-        return personMapper.mapToPersonDto(personRepository.save(personEntity));
+        return personMapper.mapToPersonDto(personRepository.save(person));
     }
 
 }
