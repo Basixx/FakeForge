@@ -11,7 +11,7 @@ public class UserService {
 
     private final UserCollector userCollector;
 
-    public User registerUser(User user) {
+    public User registerUser(UserParams user) {
         return userCollector.registerUser(user);
     }
 

@@ -17,7 +17,7 @@ public class UserController {
     @PostMapping(value = "users/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse registerClient(@RequestBody UserRequest userRequest) {
-        return UserResponse.fromUser(userService.registerUser(userRequest));
+        return UserResponse.of(userService.registerUser(userRequest));
     }
 
 }

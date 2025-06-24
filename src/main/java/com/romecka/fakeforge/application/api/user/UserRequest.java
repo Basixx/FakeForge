@@ -1,9 +1,9 @@
 package com.romecka.fakeforge.application.api.user;
 
-import com.romecka.fakeforge.domain.user.User;
+import com.romecka.fakeforge.domain.user.UserParams;
 
 public record UserRequest(String name,
                           String lastName,
-                          String emailAddress) implements User {
+                          String emailAddress) implements UserParams {
 
 }

@@ -6,7 +6,7 @@ public record UserResponse(String name,
                            String lastName,
                            String emailAddress) {
 
-    public static UserResponse fromUser(User user) {
+    public static UserResponse of(User user) {
         return new UserResponse(
                 user.name(),
                 user.lastName(),
