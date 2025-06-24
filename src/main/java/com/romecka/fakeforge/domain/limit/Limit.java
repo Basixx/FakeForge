@@ -1,5 +1,5 @@
 package com.romecka.fakeforge.domain.limit;
 
-public interface LimitEntity {
+public interface Limit {
 
 }

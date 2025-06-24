@@ -15,13 +15,13 @@ public class DbLimitCollector implements LimitCollector {
 
     @Override
     public LimitDto getLimit(Long userId) {
-        Limit limit = limitRepository.findByUserId(userId).orElseThrow();
+        LimitEntity limit = limitRepository.findByUserId(userId).orElseThrow();
         return limitMapper.mapToLimitDto(limit);
     }
 
     @Override
     public void useLimit(Long userId) {
-        Limit limit = limitRepository.findByUserId(userId).orElseThrow();
+        LimitEntity limit = limitRepository.findByUserId(userId).orElseThrow();
         limit.availableLimit(limit.availableLimit() - 1);
         limitRepository.save(limit);
     }

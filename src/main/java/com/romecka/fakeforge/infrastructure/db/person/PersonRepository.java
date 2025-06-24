@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface PersonRepository extends JpaRepository<Person, Long> {
+interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
-    Page<Person> findByUserId(Long userId, Pageable pageable);
+    Page<PersonEntity> findByUserId(Long userId, Pageable pageable);
 
-    default List<Person> findByUserId(Long userId,
-                                      int page,
-                                      int size) {
+    default List<PersonEntity> findByUserId(Long userId,
+                                            int page,
+                                            int size) {
         Pageable pageable = PageRequest.of(page, size);
         return findByUserId(userId, pageable).getContent();
     }

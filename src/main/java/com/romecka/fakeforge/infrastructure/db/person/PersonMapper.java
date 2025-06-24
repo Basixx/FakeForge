@@ -14,7 +14,7 @@ class PersonMapper {
 
     private final AddressMapper addressMapper;
 
-    public PersonDto mapToPersonDto(Person person) {
+    public PersonDto mapToPersonDto(PersonEntity person) {
         return new PersonDto(
                 person.name(),
                 person.lastName(),
@@ -29,7 +29,7 @@ class PersonMapper {
         );
     }
 
-    public List<PersonDto> mapToPersonDtoList(List<Person> personEntities) {
+    public List<PersonDto> mapToPersonDtoList(List<PersonEntity> personEntities) {
         return personEntities.stream()
                 .map(this::mapToPersonDto)
                 .toList();

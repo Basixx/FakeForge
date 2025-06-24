@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.infrastructure.db.user;
+package com.romecka.fakeforge.infrastructure.db.person;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @Entity
 @Table(name = "addresses")
-public class Address {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

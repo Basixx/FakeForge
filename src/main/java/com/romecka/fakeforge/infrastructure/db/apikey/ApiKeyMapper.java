@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class ApiKeyMapper {
 
-    public ApiKeyDto mapToApiKeyDto(ApiKey apiKey) {
+    public ApiKeyDto mapToApiKeyDto(ApiKeyEntity apiKey) {
         return new ApiKeyDto(apiKey.apiKey(), apiKey.user().id());
     }
 
