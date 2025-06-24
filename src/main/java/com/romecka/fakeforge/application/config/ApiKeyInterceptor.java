@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.application.config;
 
 import com.romecka.fakeforge.application.service.exception.UnauthorizedException;
-import com.romecka.fakeforge.domain.apikey.ApiKeyDto;
+import com.romecka.fakeforge.domain.apikey.ApiKey;
 import com.romecka.fakeforge.domain.apikey.ApiKeyService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,9 +24,9 @@ public class ApiKeyInterceptor implements HandlerInterceptor {
         if (apiKey == null || apiKey.isBlank()) {
             throw new UnauthorizedException("Missing API key");
         }
-        ApiKeyDto key = apiKeyService.findByRawApiKey(apiKey);
+        ApiKey key = apiKeyService.findByRawApiKey(apiKey);
 
-        request.setAttribute("currentUserId", key.userId());
+        request.setAttribute("currentUserId", key.user().id());
         return true;
     }
 

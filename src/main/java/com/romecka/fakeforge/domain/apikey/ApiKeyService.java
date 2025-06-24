@@ -13,7 +13,7 @@ public class ApiKeyService {
 
     private final ApiKeyProvider apiKeyProvider;
 
-    public ApiKeyDto findByRawApiKey(String rawApiKey) {
+    public ApiKey findByRawApiKey(String rawApiKey) {
         String apiKey = apiKeyProvider.hashedApiKey(rawApiKey);
         return apiKeyCollector.getApiKey(apiKey);
     }
