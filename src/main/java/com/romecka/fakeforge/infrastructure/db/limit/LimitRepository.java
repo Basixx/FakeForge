@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface LimitRepository extends JpaRepository<Limit, Long> {
+public interface LimitRepository extends JpaRepository<LimitEntity, Long> {
 
-    Optional<Limit> findByUserId(Long userId);
+    Optional<LimitEntity> findByUserEntityId(Long userId);
 
 }

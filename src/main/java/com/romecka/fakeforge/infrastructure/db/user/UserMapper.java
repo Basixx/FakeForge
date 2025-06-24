@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class UserMapper {
 
-    UserResponseDto mapToUserResponseDto(User user) {
+    UserResponseDto mapToUserResponseDto(UserEntity userEntity) {
         return new UserResponseDto(
-                user.name(),
-                user.lastName(),
-                user.emailAddress()
+                userEntity.name(),
+                userEntity.lastName(),
+                userEntity.emailAddress()
         );
     }
 

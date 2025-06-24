@@ -1,5 +1,5 @@
 package com.romecka.fakeforge.domain.person;
 
-public interface PersonEntity {
+public interface Person {
 
 }

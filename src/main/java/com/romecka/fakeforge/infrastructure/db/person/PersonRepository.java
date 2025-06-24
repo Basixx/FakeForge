@@ -9,15 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface PersonRepository extends JpaRepository<Person, Long> {
+interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
-    Page<Person> findByUserId(Long userId, Pageable pageable);
+    Page<PersonEntity> findByUserEntityId(Long userId, Pageable pageable);
 
-    default List<Person> findByUserId(Long userId,
-                                      int page,
-                                      int size) {
+    default List<PersonEntity> findByUserEntityId(Long userId,
+                                                  int page,
+                                                  int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return findByUserId(userId, pageable).getContent();
+        return findByUserEntityId(userId, pageable).getContent();
     }
 
 }

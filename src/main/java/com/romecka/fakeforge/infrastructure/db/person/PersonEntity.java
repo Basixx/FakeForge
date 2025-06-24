@@ -1,10 +1,10 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
 import com.romecka.fakeforge.domain.person.Gender;
-import com.romecka.fakeforge.domain.person.PersonEntity;
+import com.romecka.fakeforge.domain.person.Person;
 import com.romecka.fakeforge.infrastructure.db.user.Address;
 import com.romecka.fakeforge.infrastructure.db.user.Document;
-import com.romecka.fakeforge.infrastructure.db.user.User;
+import com.romecka.fakeforge.infrastructure.db.user.UserEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +27,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "persons", indexes = {
         @Index(name = "idx_persons_user_id", columnList = "user_id")
 })
-public class Person implements PersonEntity {
+public class PersonEntity implements Person {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -76,6 +76,6 @@ public class Person implements PersonEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
 }
