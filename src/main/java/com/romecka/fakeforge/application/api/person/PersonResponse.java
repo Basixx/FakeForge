@@ -1,7 +1,5 @@
 package com.romecka.fakeforge.application.api.person;
 
-import com.romecka.fakeforge.domain.person.Address;
-import com.romecka.fakeforge.domain.person.Document;
 import com.romecka.fakeforge.domain.person.Gender;
 import com.romecka.fakeforge.domain.person.Person;
 
@@ -13,10 +11,10 @@ public record PersonResponse(String name,
                              Gender gender,
                              String citizenship,
                              String bankAccountNumber,
-                             Document documentDto,
-                             Address addressDto) {
+                             DocumentResponse document,
+                             AddressResponse address) {
 
-    public static PersonResponse fromPerson(Person person) {
+    public static PersonResponse of(Person person) {
         return new PersonResponse(
                 person.name(),
                 person.lastName(),
@@ -26,8 +24,8 @@ public record PersonResponse(String name,
                 person.gender(),
                 person.citizenship(),
                 person.bankAccountNumber(),
-                person.document(),
-                person.address()
+                DocumentResponse.of(person.document()),
+                AddressResponse.of(person.address())
         );
     }
 

@@ -23,13 +23,13 @@ public class PersonController {
     public PersonsResponse getPersonsByUser(@CurrentUser Long userId,
                                             @RequestParam(defaultValue = "0") int page,
                                             @RequestParam(defaultValue = "10") int size) {
-        return PersonsResponse.fromPerson(personService.getPersonsFromUser(userId, page, size));
+        return PersonsResponse.of(personService.getPersonsFromUser(userId, page, size));
     }
 
     @PostMapping(value = "users/persons")
     @ResponseStatus(CREATED)
     public PersonResponse createUser(@CurrentUser Long userId) {
-        return PersonResponse.fromPerson(personService.createPerson(userId));
+        return PersonResponse.of(personService.createPerson(userId));
     }
 
 }

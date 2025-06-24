@@ -6,10 +6,10 @@ import java.util.List;
 
 public record PersonsResponse(List<PersonResponse> persons) {
 
-    public static PersonsResponse fromPerson(List<Person> persons) {
+    public static PersonsResponse of(List<Person> persons) {
         List<PersonResponse> personResponses = persons
                 .stream()
-                .map(PersonResponse::fromPerson)
+                .map(PersonResponse::of)
                 .toList();
         return new PersonsResponse(personResponses);
     }

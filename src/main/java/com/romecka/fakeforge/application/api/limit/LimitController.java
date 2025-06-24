@@ -18,7 +18,7 @@ public class LimitController {
     @GetMapping(value = "/users/limit")
     @ResponseStatus(OK)
     public LimitResponse getUserLimit(@CurrentUser Long userId) {
-        return LimitResponse.fromLimit(limitService.getUserLimit(userId));
+        return LimitResponse.of(limitService.getUserLimit(userId));
     }
 
 }
