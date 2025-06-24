@@ -3,8 +3,8 @@ package com.romecka.fakeforge.infrastructure.db.user;
 import com.romecka.fakeforge.domain.apikey.ApiKeyProvider;
 import com.romecka.fakeforge.domain.limit.LimitProvider;
 import com.romecka.fakeforge.domain.user.User;
-import com.romecka.fakeforge.domain.user.UserCollector;
 import com.romecka.fakeforge.domain.user.UserParams;
+import com.romecka.fakeforge.domain.user.Users;
 import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
 import com.romecka.fakeforge.infrastructure.db.limit.LimitEntity;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DbUserCollector implements UserCollector {
+public class UserStorage implements Users {
 
     private final UserRepository userRepository;
 

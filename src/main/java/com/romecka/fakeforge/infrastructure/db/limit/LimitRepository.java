@@ -8,6 +8,6 @@ import java.util.Optional;
 @Repository
 public interface LimitRepository extends JpaRepository<LimitEntity, Long> {
 
-    Optional<LimitEntity> findByUserId(Long userId);
+    Optional<LimitEntity> findByUserId(long userId);
 
 }

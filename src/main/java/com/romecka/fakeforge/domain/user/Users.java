@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.domain.user;
 
-public interface UserCollector {
+public interface Users {
 
     User registerUser(UserParams user);
 

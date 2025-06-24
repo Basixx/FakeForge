@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserCollector userCollector;
+    private final Users users;
 
     public User registerUser(UserParams user) {
-        return userCollector.registerUser(user);
+        return users.registerUser(user);
     }
 
 }

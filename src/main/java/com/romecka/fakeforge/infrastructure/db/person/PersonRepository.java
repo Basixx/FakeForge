@@ -12,11 +12,9 @@ import java.util.List;
 @Repository
 interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
-    Page<Person> findByUserId(Long userId, Pageable pageable);
+    Page<Person> findByUserId(long userId, Pageable pageable);
 
-    default List<Person> findByUserId(Long userId,
-                                      int page,
-                                      int size) {
+    default List<Person> findByUserId(long userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return findByUserId(userId, pageable).getContent();
     }

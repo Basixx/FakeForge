@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
+import com.romecka.fakeforge.domain.person.People;
 import com.romecka.fakeforge.domain.person.Person;
-import com.romecka.fakeforge.domain.person.PersonCollector;
 import com.romecka.fakeforge.domain.person.PersonProvider;
 import com.romecka.fakeforge.infrastructure.db.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DbPersonCollector implements PersonCollector {
+public class PersonStorage implements People {
 
     private final PersonRepository personRepository;
 
@@ -20,12 +20,12 @@ public class DbPersonCollector implements PersonCollector {
     private final UserRepository userRepository;
 
     @Override
-    public List<Person> getPersonsOfUser(Long userId, int page, int size) {
+    public List<Person> getPersonsOfUser(long userId, int page, int size) {
         return personRepository.findByUserId(userId, page, size);
     }
 
     @Override
-    public Person createPerson(Long userId) {
+    public Person createPerson(long userId) {
         PersonEntity person = (PersonEntity) personProvider.generateRandomPerson();
         person.user(userRepository.findById(userId).orElseThrow());
 
