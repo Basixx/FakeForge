@@ -1,5 +1,6 @@
 package com.romecka.fakeforge.infrastructure.db.user;
 
+import com.romecka.fakeforge.domain.user.User;
 import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
 import com.romecka.fakeforge.infrastructure.db.limit.LimitEntity;
 import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
@@ -23,7 +24,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements User {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
