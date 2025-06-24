@@ -1,16 +1,16 @@
 package com.romecka.fakeforge.application.api.user;
 
-import com.romecka.fakeforge.domain.user.UserResponseDto;
+import com.romecka.fakeforge.domain.user.User;
 
 public record UserResponse(String name,
                            String lastName,
                            String emailAddress) {
 
-    public static UserResponse fromUser(UserResponseDto userResponseDto) {
+    public static UserResponse fromUser(User user) {
         return new UserResponse(
-                userResponseDto.name(),
-                userResponseDto.lastName(),
-                userResponseDto.emailAddress()
+                user.name(),
+                user.lastName(),
+                user.emailAddress()
         );
     }
 

@@ -11,8 +11,8 @@ public class UserService {
 
     private final UserCollector userCollector;
 
-    public UserResponseDto registerUser(UserData userData) {
-        return userCollector.registerUser(userData);
+    public User registerUser(User user) {
+        return userCollector.registerUser(user);
     }
 
 }

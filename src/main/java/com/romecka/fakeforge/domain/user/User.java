@@ -1,6 +1,6 @@
 package com.romecka.fakeforge.domain.user;
 
-public interface UserData {
+public interface User {
 
     String name();
 
