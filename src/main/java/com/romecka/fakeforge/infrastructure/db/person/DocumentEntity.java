@@ -1,5 +1,6 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
+import com.romecka.fakeforge.domain.person.Document;
 import com.romecka.fakeforge.domain.person.DocumentType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @Entity
 @Table(name = "documents")
-public class DocumentEntity {
+public class DocumentEntity implements Document {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

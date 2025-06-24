@@ -16,9 +16,9 @@ public class PersonService {
 
     private final LimitCollector limitCollector;
 
-    public List<PersonDto> getPersonsFromUser(Long userId,
-                                              int page,
-                                              int size) {
+    public List<Person> getPersonsFromUser(Long userId,
+                                           int page,
+                                           int size) {
         return personCollector.getPersonsOfUser(
                 userId,
                 page,
@@ -26,7 +26,7 @@ public class PersonService {
         );
     }
 
-    public PersonDto createPerson(Long userId) {
+    public Person createPerson(Long userId) {
         limitCollector.useLimit(userId);
         return personCollector.createPerson(userId);
     }
