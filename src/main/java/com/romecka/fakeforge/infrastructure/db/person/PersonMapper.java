@@ -14,23 +14,23 @@ class PersonMapper {
 
     private final AddressMapper addressMapper;
 
-    public PersonDto mapToPersonDto(PersonEntity personEntity) {
+    public PersonDto mapToPersonDto(Person person) {
         return new PersonDto(
-                personEntity.name(),
-                personEntity.lastName(),
-                personEntity.emailAddress(),
-                personEntity.phoneNumber(),
-                personEntity.personalId(),
-                personEntity.gender(),
-                personEntity.citizenship(),
-                personEntity.bankAccountNumber(),
-                documentMapper.mapToDocumentDto(personEntity.document()),
-                addressMapper.mapToAddressDto(personEntity.address())
+                person.name(),
+                person.lastName(),
+                person.emailAddress(),
+                person.phoneNumber(),
+                person.personalId(),
+                person.gender(),
+                person.citizenship(),
+                person.bankAccountNumber(),
+                documentMapper.mapToDocumentDto(person.document()),
+                addressMapper.mapToAddressDto(person.address())
         );
     }
 
-    public List<PersonDto> mapToPersonDtoList(List<PersonEntity> personEntityEntities) {
-        return personEntityEntities.stream()
+    public List<PersonDto> mapToPersonDtoList(List<Person> personEntities) {
+        return personEntities.stream()
                 .map(this::mapToPersonDto)
                 .toList();
     }

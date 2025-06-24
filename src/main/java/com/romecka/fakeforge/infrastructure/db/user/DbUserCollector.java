@@ -5,8 +5,8 @@ import com.romecka.fakeforge.domain.limit.LimitProvider;
 import com.romecka.fakeforge.domain.user.UserCollector;
 import com.romecka.fakeforge.domain.user.UserData;
 import com.romecka.fakeforge.domain.user.UserResponseDto;
-import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
-import com.romecka.fakeforge.infrastructure.db.limit.LimitEntity;
+import com.romecka.fakeforge.infrastructure.db.apikey.ApiKey;
+import com.romecka.fakeforge.infrastructure.db.limit.Limit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +23,15 @@ public class DbUserCollector implements UserCollector {
     private final LimitProvider limitProvider;
 
     public UserResponseDto registerUser(UserData userData) {
-        ApiKeyEntity apiKeyEntity = (ApiKeyEntity) apiKeyProvider.generateApiKey();
-        LimitEntity limitEntity = (LimitEntity) limitProvider.generateDefaultLimit();
-        UserEntity userEntity = new UserEntity()
+        ApiKey apiKey = (ApiKey) apiKeyProvider.generateApiKey();
+        Limit limit = (Limit) limitProvider.generateDefaultLimit();
+        User user = new User()
                 .name(userData.name())
                 .lastName(userData.lastName())
                 .emailAddress(userData.emailAddress())
-                .apiKeyEntity(apiKeyEntity)
-                .limitEntity(limitEntity);
-        return userMapper.mapToUserResponseDto(userRepository.save(userEntity));
+                .apiKey(apiKey)
+                .limit(limit);
+        return userMapper.mapToUserResponseDto(userRepository.save(user));
     }
 
 }

@@ -1,9 +1,8 @@
 package com.romecka.fakeforge.infrastructure.db.user;
 
-import com.romecka.fakeforge.domain.user.User;
-import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
-import com.romecka.fakeforge.infrastructure.db.limit.LimitEntity;
-import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
+import com.romecka.fakeforge.infrastructure.db.apikey.ApiKey;
+import com.romecka.fakeforge.infrastructure.db.limit.Limit;
+import com.romecka.fakeforge.infrastructure.db.person.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +23,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @Entity
 @Table(name = "users")
-public class UserEntity implements User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -45,18 +44,18 @@ public class UserEntity implements User {
 
     @OneToOne(cascade = PERSIST)
     @JoinColumn(name = "api_key_id")
-    private ApiKeyEntity apiKeyEntity;
+    private ApiKey apiKey;
 
     @OneToOne(cascade = PERSIST)
     @JoinColumn(name = "limit_id")
-    private LimitEntity limitEntity;
+    private Limit limit;
 
     @OneToMany(
             cascade = REMOVE,
             orphanRemoval = true,
-            targetEntity = PersonEntity.class,
+            targetEntity = Person.class,
             mappedBy = "user"
     )
-    private List<PersonEntity> personEntityEntities;
+    private List<Person> personEntities;
 
 }
