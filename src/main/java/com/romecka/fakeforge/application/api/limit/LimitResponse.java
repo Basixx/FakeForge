@@ -4,7 +4,7 @@ import com.romecka.fakeforge.domain.limit.Limit;
 
 public record LimitResponse(int dailyLimit, int availableLimit) {
 
-    public static LimitResponse fromLimit(Limit limit) {
+    public static LimitResponse of(Limit limit) {
         return new LimitResponse(limit.dailyLimit(), limit.availableLimit());
     }
 
