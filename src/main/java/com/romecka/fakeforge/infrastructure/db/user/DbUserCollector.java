@@ -25,13 +25,12 @@ public class DbUserCollector implements UserCollector {
     public UserResponseDto registerUser(UserData userData) {
         ApiKey apiKey = (ApiKey) apiKeyProvider.generateApiKey();
         Limit limit = (Limit) limitProvider.generateDefaultLimit();
-        User user = User.builder()
+        User user = new User()
                 .name(userData.name())
                 .lastName(userData.lastName())
                 .emailAddress(userData.emailAddress())
                 .apiKey(apiKey)
-                .limit(limit)
-                .build();
+                .limit(limit);
         return userMapper.mapToUserResponseDto(userRepository.save(user));
     }
 

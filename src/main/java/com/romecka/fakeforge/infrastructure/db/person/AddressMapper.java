@@ -11,11 +11,11 @@ class AddressMapper {
 
     public AddressDto mapToAddressDto(Address address) {
         return new AddressDto(
-                address.getStreet(),
-                address.getBuildingNumber(),
-                address.getApartmentNumber(),
-                address.getPostalCode(),
-                address.getCity()
+                address.street(),
+                address.buildingNumber(),
+                address.apartmentNumber(),
+                address.postalCode(),
+                address.city()
         );
     }
 

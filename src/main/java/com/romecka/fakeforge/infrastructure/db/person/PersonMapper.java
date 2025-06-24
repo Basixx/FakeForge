@@ -16,16 +16,16 @@ class PersonMapper {
 
     public PersonDto mapToPersonDto(Person person) {
         return new PersonDto(
-                person.getName(),
-                person.getLastName(),
-                person.getEmailAddress(),
-                person.getPhoneNumber(),
-                person.getPersonalId(),
-                person.getGender(),
-                person.getCitizenship(),
-                person.getBankAccountNumber(),
-                documentMapper.mapToDocumentDto(person.getDocument()),
-                addressMapper.mapToAddressDto(person.getAddress())
+                person.name(),
+                person.lastName(),
+                person.emailAddress(),
+                person.phoneNumber(),
+                person.personalId(),
+                person.gender(),
+                person.citizenship(),
+                person.bankAccountNumber(),
+                documentMapper.mapToDocumentDto(person.document()),
+                addressMapper.mapToAddressDto(person.address())
         );
     }
 

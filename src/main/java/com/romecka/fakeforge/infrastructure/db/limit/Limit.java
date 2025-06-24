@@ -10,21 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@Data
 @Entity
 @Table(name = "limits")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@Builder
 public class Limit implements LimitEntity {
 
     @Id
@@ -34,12 +26,10 @@ public class Limit implements LimitEntity {
 
     @NotNull
     @Column(name = "daily_limit")
-    @Builder.Default
     private int dailyLimit = 100;
 
     @NotNull
     @Column(name = "available_limit")
-    @Builder.Default
     private int availableLimit = 100;
 
     @OneToOne(mappedBy = "limit")

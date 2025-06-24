@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 class ApiKeyMapper {
 
     public ApiKeyDto mapToApiKeyDto(ApiKey apiKey) {
-        return new ApiKeyDto(apiKey.getApiKey(), apiKey.getUser().getId());
+        return new ApiKeyDto(apiKey.apiKey(), apiKey.user().id());
     }
 
 }

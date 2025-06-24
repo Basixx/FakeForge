@@ -10,9 +10,9 @@ class UserMapper {
 
     UserResponseDto mapToUserResponseDto(User user) {
         return new UserResponseDto(
-                user.getName(),
-                user.getLastName(),
-                user.getEmailAddress()
+                user.name(),
+                user.lastName(),
+                user.emailAddress()
         );
     }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class LimitGenerator implements LimitProvider {
 
     public Limit generateDefaultLimit() {
-        return Limit.builder().build();
+        return new Limit();
     }
 
 }

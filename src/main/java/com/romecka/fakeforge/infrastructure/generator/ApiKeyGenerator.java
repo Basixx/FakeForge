@@ -28,10 +28,9 @@ public class ApiKeyGenerator implements ApiKeyProvider {
     }
 
     public ApiKey generateApiKey() {
-        return ApiKey.builder()
+        return new ApiKey()
                 .apiKey(hashedApiKey(generateKey()))
-                .creationDateTime(LocalDateTime.now())
-                .build();
+                .creationDateTime(LocalDateTime.now());
     }
 
     private static String generateKey() {
