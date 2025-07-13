@@ -21,14 +21,16 @@ public class PersonStorage implements People {
 
     @Override
     public List<Person> getPersonsOfUser(long userId, int page, int size) {
-        return personRepository.findByUserId(userId, page, size);
+        return personRepository.findByUserId(userId, page, size)
+                .stream()
+                .map(entity -> (Person) entity)
+                .toList();
     }
 
     @Override
     public Person createPerson(long userId) {
         PersonEntity person = (PersonEntity) personProvider.generateRandomPerson();
         person.user(userRepository.findById(userId).orElseThrow());
-
         return personRepository.save(person);
     }
 
