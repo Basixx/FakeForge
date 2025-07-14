@@ -3,6 +3,7 @@ package com.romecka.fakeforge.application.api.user;
 import com.romecka.fakeforge.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,11 +26,18 @@ public class UserController {
 
     @GetMapping("users")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
         return userService.getUsers()
                 .stream()
                 .map(UserResponse::of)
                 .toList();
+    }
+
+    @GetMapping("hello")
+    @ResponseStatus(HttpStatus.OK)
+    public String hello() {
+        return "Hello World!";
     }
 
 }

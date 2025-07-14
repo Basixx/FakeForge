@@ -30,6 +30,7 @@ public class UserStorage implements Users {
                 .name(userParams.name())
                 .lastName(userParams.lastName())
                 .emailAddress(userParams.emailAddress())
+                .role("ROLE_USER")
                 .apiKey(apiKey)
                 .limit(limit);
         return userRepository.save(user);
@@ -40,6 +41,11 @@ public class UserStorage implements Users {
                 .stream()
                 .map(entity -> (User) entity)
                 .toList();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmailAddress(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
 }

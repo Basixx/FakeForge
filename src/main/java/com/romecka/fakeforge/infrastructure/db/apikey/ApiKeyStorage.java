@@ -12,8 +12,8 @@ public class ApiKeyStorage implements ApiKeys {
     private final ApiKeyRepository apiKeyRepository;
 
     @Override
-    public ApiKey getApiKey(String rawApiKey) {
-        return apiKeyRepository.findByApiKey(rawApiKey).orElseThrow();
+    public ApiKey getApiKey(String encodedApiKey) {
+        return apiKeyRepository.findByApiKey(encodedApiKey).orElseThrow();
     }
 
 }

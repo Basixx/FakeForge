@@ -13,13 +13,14 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApiKeyInterceptor apiKeyInterceptor;
+
     private final CurrentUserArgumentResolver currentUserArgumentResolver;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(apiKeyInterceptor)
-                .addPathPatterns("/users/limit")
-                .addPathPatterns("/users/persons");
+//        registry.addInterceptor(apiKeyInterceptor);
+//                .addPathPatterns("/users/limit")
+//                .addPathPatterns("/users/persons");
     }
 
     @Override

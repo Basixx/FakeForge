@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011
+      author: barbara
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: user_role
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+        - sql:
+            sql: UPDATE users SET user_role = 'ROLE_USER' WHERE user_role IS NULL OR user_role = ''

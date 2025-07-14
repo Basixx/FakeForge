@@ -17,6 +17,10 @@ spring:
     jdbc:
       repositories:
         enabled: false
+  security:
+    user:
+      name: testUser
+      password: pass1
 
 management:
   endpoints:

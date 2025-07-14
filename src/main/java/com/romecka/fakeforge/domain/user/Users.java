@@ -8,4 +8,6 @@ public interface Users {
 
     List<User> getUsers();
 
+    User getUserByEmail(String email);
+
 }

@@ -19,3 +19,5 @@ databaseChangeLog:
       file: db/changelog/primarydb/changeset-009-add-index-user-id-to-persons.yml
   - include:
       file: db/changelog/changeset-010-add-user-id-column-to-api-keys-table.yml
+  - include:
+      file: db/changelog/changeset-011-add-role-to-user.yml
