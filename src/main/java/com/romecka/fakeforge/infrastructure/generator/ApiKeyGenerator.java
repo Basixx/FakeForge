@@ -17,13 +17,6 @@ public class ApiKeyGenerator implements ApiKeyProvider {
 
     @Override
     public String hashedApiKey(String rawKey) {
-//        try {
-//            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//            byte[] hash = digest.digest(rawKey.getBytes(StandardCharsets.UTF_8));
-//            return Base64.getEncoder().encodeToString(hash);
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeException("SHA-256 not supported", e);
-//        }
         return encoder.encode(rawKey);
     }
 
