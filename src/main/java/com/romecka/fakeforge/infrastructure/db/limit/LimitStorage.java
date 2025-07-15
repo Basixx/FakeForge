@@ -5,6 +5,8 @@ import com.romecka.fakeforge.domain.limit.Limits;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class LimitStorage implements Limits {
@@ -12,8 +14,9 @@ public class LimitStorage implements Limits {
     private final LimitRepository limitRepository;
 
     @Override
-    public Limit getLimit(long userId) {
-        return limitRepository.findByUserId(userId).orElseThrow();
+    public Optional<Limit> getLimit(long userId) {
+        return limitRepository.findByUserId(userId)
+                .map(entity -> entity);
     }
 
     @Override

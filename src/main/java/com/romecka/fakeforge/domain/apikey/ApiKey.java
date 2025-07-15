@@ -6,4 +6,6 @@ public interface ApiKey {
 
     User user();
 
+    String apiKey();
+
 }

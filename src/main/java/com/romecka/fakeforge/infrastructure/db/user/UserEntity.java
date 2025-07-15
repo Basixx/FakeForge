@@ -43,6 +43,10 @@ public class UserEntity implements User {
     @NotNull
     private String emailAddress;
 
+    @Column(length = 20, name = "user_role")
+    @NotNull
+    private String role;
+
     @OneToOne(cascade = PERSIST)
     @JoinColumn(name = "api_key_id")
     private ApiKeyEntity apiKey;

@@ -8,7 +8,10 @@ import com.romecka.fakeforge.domain.user.Users;
 import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
 import com.romecka.fakeforge.infrastructure.db.limit.LimitEntity;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,9 +30,22 @@ public class UserStorage implements Users {
                 .name(userParams.name())
                 .lastName(userParams.lastName())
                 .emailAddress(userParams.emailAddress())
+                .role("ROLE_USER")
                 .apiKey(apiKey)
                 .limit(limit);
         return userRepository.save(user);
+    }
+
+    public @NotNull List<User> getUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(entity -> (User) entity)
+                .toList();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmailAddress(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
 }

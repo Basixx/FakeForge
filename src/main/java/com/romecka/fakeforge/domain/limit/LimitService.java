@@ -12,7 +12,7 @@ public class LimitService {
     private final Limits limits;
 
     public Limit getUserLimit(long userId) {
-        return limits.getLimit(userId);
+        return limits.getLimit(userId).orElseThrow(LimitNotFoundException::new);
     }
 
 }

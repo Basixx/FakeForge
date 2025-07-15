@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.infrastructure.db.person;
 
-import com.romecka.fakeforge.domain.person.Person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,9 +11,9 @@ import java.util.List;
 @Repository
 interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
-    Page<Person> findByUserId(long userId, Pageable pageable);
+    Page<PersonEntity> findByUserId(long userId, Pageable pageable);
 
-    default List<Person> findByUserId(long userId, int page, int size) {
+    default List<PersonEntity> findByUserId(long userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return findByUserId(userId, pageable).getContent();
     }

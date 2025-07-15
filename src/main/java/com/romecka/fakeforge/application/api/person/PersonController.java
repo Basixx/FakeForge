@@ -1,8 +1,10 @@
 package com.romecka.fakeforge.application.api.person;
 
-import com.romecka.fakeforge.application.config.CurrentUser;
 import com.romecka.fakeforge.domain.person.PersonService;
+import com.romecka.fakeforge.domain.user.UserAuthenticationDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,16 +22,22 @@ public class PersonController {
 
     @GetMapping(value = "/users/persons")
     @ResponseStatus(OK)
-    public PersonsResponse getPersonsByUser(@CurrentUser Long userId,
+    @PreAuthorize("hasRole('USER')")
+    public PersonsResponse getPersonsByUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails,
                                             @RequestParam(defaultValue = "0") int page,
                                             @RequestParam(defaultValue = "10") int size) {
-        return PersonsResponse.of(personService.getPersonsFromUser(userId, page, size));
+        return PersonsResponse.of(personService.getPersonsFromUser(
+                userDetails.getUserId(),
+                page,
+                size
+        ));
     }
 
     @PostMapping(value = "users/persons")
     @ResponseStatus(CREATED)
-    public PersonResponse createUser(@CurrentUser Long userId) {
-        return PersonResponse.of(personService.createPerson(userId));
+    @PreAuthorize("hasRole('USER')")
+    public PersonResponse createUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails) {
+        return PersonResponse.of(personService.createPerson(userDetails.getUserId()));
     }
 
 }

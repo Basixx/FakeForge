@@ -1,8 +1,10 @@
 package com.romecka.fakeforge.domain.limit;
 
+import java.util.Optional;
+
 public interface Limits {
 
-    Limit getLimit(long userId);
+    Optional<Limit> getLimit(long userId);
 
     void useLimit(long userId);
 
