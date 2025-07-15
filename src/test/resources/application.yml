@@ -9,3 +9,7 @@ spring:
     properties.hibernate.cache:
       use_second_level_cache: false
       use_query_cache: false
+
+jwt:
+  secret: testSecret
+  expiration: P10D

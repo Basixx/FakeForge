@@ -34,10 +34,10 @@ public class UserController {
                 .toList();
     }
 
-    @GetMapping("hello")
+    @PostMapping("login")
     @ResponseStatus(HttpStatus.OK)
-    public String hello() {
-        return "Hello World!";
+    public String getUserInfo(@RequestBody UserAuthenticationRequest authenticationRequest) {
+        return userService.authenticateAndGenerateToken(authenticationRequest);
     }
 
 }
