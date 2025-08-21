@@ -13,29 +13,39 @@ import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 class ArchitectureTest {
 
     private static final String APPLICATION = "application";
+
     private static final String DOMAIN = "domain";
+
     private static final String INFRASTRUCTURE = "infrastructure";
+
     private static final String ROOT = "root";
+
+    private static final String UTILS = "utils";
 
     @ArchTest
     static final ArchRule APPLICATION_ACCESS = layers()
-            .whereLayer(APPLICATION).mayOnlyAccessLayers(DOMAIN)
+            .whereLayer(APPLICATION).mayOnlyAccessLayers(DOMAIN, UTILS)
             .whereLayer(APPLICATION).mayOnlyBeAccessedByLayers(ROOT);
 
     @ArchTest
     static final ArchRule DOMAIN_ACCESS = layers()
-            .whereLayer(DOMAIN).mayNotAccessAnyLayer();
+            .whereLayer(DOMAIN).mayOnlyAccessLayers(UTILS);
 
     @ArchTest
     static final ArchRule INFRASTRUCTURE_ACCESS = layers()
-            .whereLayer(INFRASTRUCTURE).mayOnlyAccessLayers(DOMAIN)
+            .whereLayer(INFRASTRUCTURE).mayOnlyAccessLayers(DOMAIN, UTILS)
             .whereLayer(INFRASTRUCTURE).mayNotBeAccessedByAnyLayer();
+
+    @ArchTest
+    static final ArchRule UTILS_ACCESS = layers()
+            .whereLayer(UTILS).mayNotAccessAnyLayer();
 
     private static Architectures.LayeredArchitecture layers() {
         return layeredArchitecture().consideringOnlyDependenciesInAnyPackage("com.romecka.fakeforge..")
                 .layer(ROOT).definedBy("com.romecka.fakeforge")
                 .layer(APPLICATION).definedBy("com.romecka.fakeforge.application..")
                 .layer(DOMAIN).definedBy("com.romecka.fakeforge.domain..")
+                .layer(UTILS).definedBy("com.romecka.fakeforge.utils..")
                 .layer(INFRASTRUCTURE).definedBy("com.romecka.fakeforge.infrastructure..");
     }
 
