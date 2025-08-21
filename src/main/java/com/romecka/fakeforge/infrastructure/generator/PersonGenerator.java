@@ -3,32 +3,39 @@ package com.romecka.fakeforge.infrastructure.generator;
 import com.romecka.fakeforge.domain.person.DocumentType;
 import com.romecka.fakeforge.domain.person.Gender;
 import com.romecka.fakeforge.domain.person.PersonProvider;
-import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
-import com.romecka.fakeforge.infrastructure.db.person.AddressEntity;
 import com.romecka.fakeforge.infrastructure.db.person.DocumentEntity;
+import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static com.romecka.fakeforge.infrastructure.generator.AddressGenerator.address;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.bankAccountNumber;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.cellPhoneNumber;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.emailAddress;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.firstName;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.lastName;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.personalId;
+import static com.romecka.fakeforge.utils.RandomUtils.randomEnum;
 
 @Service
 @RequiredArgsConstructor
 public class PersonGenerator implements PersonProvider {
 
     public PersonEntity generateRandomPerson() {
+        Gender gender = randomEnum(Gender.class);
+        String firstName = firstName(gender);
+        String lastName = lastName(gender);
+
         return new PersonEntity()
-                .name("aaa")
-                .lastName("bbb")
-                .emailAddress("<EMAIL>")
-                .phoneNumber("1234567890")
-                .personalId("98022206177")
-                .gender(Gender.FEMALE)
+                .name(firstName)
+                .lastName(lastName)
+                .emailAddress(emailAddress(firstName, lastName))
+                .phoneNumber(cellPhoneNumber())
+                .personalId(personalId(gender))
+                .gender(gender)
                 .citizenship("PL")
-                .bankAccountNumber("1232323232323")
-                .address(new AddressEntity()
-                        .street("street")
-                        .buildingNumber(1)
-                        .apartmentNumber(12)
-                        .postalCode("12-345")
-                        .city("city"))
+                .bankAccountNumber(bankAccountNumber())
+                .address(address())
                 .document(new DocumentEntity()
                         .type(DocumentType.ID_CARD)
                         .number("1234569"));
