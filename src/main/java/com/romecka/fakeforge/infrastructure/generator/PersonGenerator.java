@@ -1,9 +1,7 @@
 package com.romecka.fakeforge.infrastructure.generator;
 
-import com.romecka.fakeforge.domain.person.DocumentType;
 import com.romecka.fakeforge.domain.person.Gender;
 import com.romecka.fakeforge.domain.person.PersonProvider;
-import com.romecka.fakeforge.infrastructure.db.person.DocumentEntity;
 import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 import static com.romecka.fakeforge.infrastructure.generator.AddressGenerator.address;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.bankAccountNumber;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.cellPhoneNumber;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.documentNumber;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.emailAddress;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.firstName;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.lastName;
@@ -36,9 +35,7 @@ public class PersonGenerator implements PersonProvider {
                 .citizenship("PL")
                 .bankAccountNumber(bankAccountNumber())
                 .address(address())
-                .document(new DocumentEntity()
-                        .type(DocumentType.ID_CARD)
-                        .number("1234569"));
+                .documentNumber(documentNumber());
     }
 
 }

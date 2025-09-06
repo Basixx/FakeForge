@@ -18,7 +18,7 @@ public interface Person {
 
     String bankAccountNumber();
 
-    Document document();
+    String documentNumber();
 
     Address address();
 

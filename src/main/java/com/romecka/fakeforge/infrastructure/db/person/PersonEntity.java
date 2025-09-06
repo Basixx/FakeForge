@@ -64,9 +64,9 @@ public class PersonEntity implements Person {
     @NotNull
     String bankAccountNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "document_id")
-    DocumentEntity document;
+    @Column(length = 9)
+    @NotNull
+    String documentNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")

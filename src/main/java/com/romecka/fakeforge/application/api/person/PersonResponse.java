@@ -11,7 +11,7 @@ public record PersonResponse(String name,
                              Gender gender,
                              String citizenship,
                              String bankAccountNumber,
-                             DocumentResponse document,
+                             String documentNumber,
                              AddressResponse address) {
 
     public static PersonResponse of(Person person) {
@@ -24,7 +24,7 @@ public record PersonResponse(String name,
                 person.gender(),
                 person.citizenship(),
                 person.bankAccountNumber(),
-                DocumentResponse.of(person.document()),
+                person.documentNumber(),
                 AddressResponse.of(person.address())
         );
     }

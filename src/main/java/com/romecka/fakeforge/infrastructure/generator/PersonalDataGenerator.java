@@ -77,6 +77,10 @@ public class PersonalDataGenerator {
         return new BankAccountNumber(bank).toString();
     }
 
+    public static String documentNumber() {
+        return new DocumentNumber().toString();
+    }
+
     private static String emailLocalPart(String firstName, String lastName) {
         return polishToLatin((firstName + "." + lastName).toLowerCase());
     }
