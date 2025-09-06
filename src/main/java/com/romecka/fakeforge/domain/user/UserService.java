@@ -33,7 +33,7 @@ public class UserService {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            userParams.emailAddress(), userParams.apiKey()
+                            userParams.emailAddress(), userParams.password()
                     )
             );
             return tokenService.generateToken(userParams.emailAddress());

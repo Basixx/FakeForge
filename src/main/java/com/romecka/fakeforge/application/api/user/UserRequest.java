@@ -4,6 +4,7 @@ import com.romecka.fakeforge.domain.user.UserParams;
 
 public record UserRequest(String name,
                           String lastName,
-                          String emailAddress) implements UserParams {
+                          String emailAddress,
+                          String password) implements UserParams {
 
 }
