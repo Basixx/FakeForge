@@ -23,3 +23,7 @@ databaseChangeLog:
       file: db/changelog/changeset-011-add-role-to-user.yml
   - include:
       file: db/changelog/changeset-012-drop-api-key-table.yml
+  - include:
+      file: db/changelog/changeset-013-drop-document-table.yml
+  - include:
+      file: db/changelog/changeset-014-drop-address-table.yml

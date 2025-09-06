@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 014
+      author: barbara
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: persons
+            constraintName: fk_person_address
+        - dropColumn:
+            tableName: persons
+            columnName: address_id
+        - dropTable:
+            tableName: addresses
+        - addColumn:
+            tableName: persons
+            columns:
+              - column:
+                  name: street
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: building_number
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: apartment_number
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postal_code
+                  type: VARCHAR(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false

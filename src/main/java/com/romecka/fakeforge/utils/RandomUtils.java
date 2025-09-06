@@ -1,5 +1,7 @@
 package com.romecka.fakeforge.utils;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.util.List;
 import java.util.random.RandomGenerator;
 
@@ -22,6 +24,14 @@ public class RandomUtils {
 
     private static int randomInt(int max) {
         return randomInt(0, max);
+    }
+
+    public static char randomLetter() {
+        return RandomStringUtils.secure().nextAlphabetic(1).toUpperCase().charAt(0);
+    }
+
+    public static char randomDigit() {
+        return RandomStringUtils.secure().nextNumeric(1).charAt(0);
     }
 
 }

@@ -23,10 +23,10 @@ public class PersonController {
     @GetMapping(value = "/users/persons")
     @ResponseStatus(OK)
     @PreAuthorize("hasRole('USER')")
-    public PersonsResponse getPersonsByUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails,
-                                            @RequestParam(defaultValue = "0") int page,
-                                            @RequestParam(defaultValue = "10") int size) {
-        return PersonsResponse.of(personService.getPersonsFromUser(
+    public PersonsDto getPersonsByUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails,
+                                       @RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "10") int size) {
+        return PersonsDto.of(personService.getPersonsFromUser(
                 userDetails.getUserId(),
                 page,
                 size
@@ -36,8 +36,8 @@ public class PersonController {
     @PostMapping(value = "users/persons")
     @ResponseStatus(CREATED)
     @PreAuthorize("hasRole('USER')")
-    public PersonResponse createUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails) {
-        return PersonResponse.of(personService.createPerson(userDetails.getUserId()));
+    public PersonDto createUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails) {
+        return PersonDto.of(personService.createPerson(userDetails.getUserId()));
     }
 
 }

@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 013
+      author: barbara
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: persons
+            constraintName: fk_person_document
+        - dropColumn:
+            tableName: persons
+            columnName: document_id
+        - dropTable:
+            tableName: documents
+        - addColumn:
+            tableName: persons
+            columns:
+              - column:
+                  name: document_number
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false

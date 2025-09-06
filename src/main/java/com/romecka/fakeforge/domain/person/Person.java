@@ -18,8 +18,16 @@ public interface Person {
 
     String bankAccountNumber();
 
-    Document document();
+    String documentNumber();
 
-    Address address();
+    String street();
+
+    int buildingNumber();
+
+    int apartmentNumber();
+
+    String postalCode();
+
+    String city();
 
 }
