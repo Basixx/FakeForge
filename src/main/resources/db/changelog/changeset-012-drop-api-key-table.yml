@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 012
+      author: barbara
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: users
+            constraintName: fk_user_api_key
+        - dropColumn:
+            tableName: users
+            columnName: api_key_id
+        - dropTable:
+            tableName: api_keys
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false

@@ -1,7 +1,5 @@
 package com.romecka.fakeforge.domain.user;
 
-import com.romecka.fakeforge.domain.apikey.ApiKey;
-
 public interface User {
 
     Long id();
@@ -12,7 +10,7 @@ public interface User {
 
     String emailAddress();
 
-    ApiKey apiKey();
+    String password();
 
     String role();
 

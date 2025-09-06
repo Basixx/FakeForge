@@ -4,6 +4,6 @@ public interface UserAuthenticationParams {
 
     String emailAddress();
 
-    String apiKey();
+    String password();
 
 }

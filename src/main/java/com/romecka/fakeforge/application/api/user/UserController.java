@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -27,11 +25,8 @@ public class UserController {
     @GetMapping("users")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ADMIN')")
-    public List<UserResponse> getUsers() {
-        return userService.getUsers()
-                .stream()
-                .map(UserResponse::of)
-                .toList();
+    public UsersResponse getUsers() {
+        return UsersResponse.of(userService.getUsers());
     }
 
     @PostMapping("login")

@@ -11,7 +11,7 @@ public class UserAuthenticationDetails implements UserDetails {
 
     private final String emailAddress;
 
-    private final String apiKey;
+    private final String password;
 
     private final List<GrantedAuthority> grantedAuthorities;
 
@@ -19,7 +19,7 @@ public class UserAuthenticationDetails implements UserDetails {
 
     public UserAuthenticationDetails(User user) {
         this.emailAddress = user.emailAddress();
-        this.apiKey = user.apiKey().apiKey();
+        this.password = user.password();
         this.grantedAuthorities = List.of(new SimpleGrantedAuthority(user.role()));
         this.userId = user.id();
     }
@@ -31,7 +31,7 @@ public class UserAuthenticationDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return apiKey;
+        return password;
     }
 
     @Override

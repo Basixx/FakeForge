@@ -1,7 +1,6 @@
 package com.romecka.fakeforge.infrastructure.db.user;
 
 import com.romecka.fakeforge.domain.user.User;
-import com.romecka.fakeforge.infrastructure.db.apikey.ApiKeyEntity;
 import com.romecka.fakeforge.infrastructure.db.limit.LimitEntity;
 import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import jakarta.persistence.Column;
@@ -43,13 +42,13 @@ public class UserEntity implements User {
     @NotNull
     private String emailAddress;
 
+    @Column(unique = true, length = 50)
+    @NotNull
+    private String password;
+
     @Column(length = 20, name = "user_role")
     @NotNull
     private String role;
-
-    @OneToOne(cascade = PERSIST)
-    @JoinColumn(name = "api_key_id")
-    private ApiKeyEntity apiKey;
 
     @OneToOne(cascade = PERSIST)
     @JoinColumn(name = "limit_id")
