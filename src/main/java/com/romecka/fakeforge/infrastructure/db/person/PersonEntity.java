@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -68,9 +67,23 @@ public class PersonEntity implements Person {
     @NotNull
     String documentNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    AddressEntity address;
+    @Column(length = 50)
+    @NotNull
+    String street;
+
+    @NotNull
+    int buildingNumber;
+
+    @NotNull
+    int apartmentNumber;
+
+    @Column(length = 6)
+    @NotNull
+    String postalCode;
+
+    @Column(length = 50)
+    @NotNull
+    String city;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

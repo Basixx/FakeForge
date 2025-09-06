@@ -20,6 +20,14 @@ public interface Person {
 
     String documentNumber();
 
-    Address address();
+    String street();
+
+    int buildingNumber();
+
+    int apartmentNumber();
+
+    String postalCode();
+
+    String city();
 
 }

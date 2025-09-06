@@ -1,6 +1,7 @@
 package com.romecka.fakeforge.infrastructure.generator;
 
 import com.romecka.fakeforge.domain.person.Gender;
+import net.datafaker.providers.base.Address;
 import net.datafaker.providers.base.IdNumber.GenderRequest;
 import net.datafaker.providers.base.IdNumber.IdNumberRequest;
 
@@ -79,6 +80,10 @@ public class PersonalDataGenerator {
 
     public static String documentNumber() {
         return new DocumentNumber().toString();
+    }
+
+    public static Address address() {
+        return dataGenerator().address();
     }
 
     private static String emailLocalPart(String firstName, String lastName) {
