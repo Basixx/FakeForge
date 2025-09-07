@@ -8,4 +8,6 @@ public interface Limits {
 
     void useLimit(long userId);
 
+    void resetLimits();
+
 }

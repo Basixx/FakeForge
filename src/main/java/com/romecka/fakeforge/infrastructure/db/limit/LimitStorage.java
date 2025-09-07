@@ -1,9 +1,11 @@
 package com.romecka.fakeforge.infrastructure.db.limit;
 
 import com.romecka.fakeforge.domain.limit.Limit;
+import com.romecka.fakeforge.domain.limit.LimitExceededException;
 import com.romecka.fakeforge.domain.limit.Limits;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,8 +24,17 @@ public class LimitStorage implements Limits {
     @Override
     public void useLimit(long userId) {
         LimitEntity limit = limitRepository.findByUserId(userId).orElseThrow();
+        if (limit.availableLimit() <= 0) {
+            throw new LimitExceededException();
+        }
         limit.availableLimit(limit.availableLimit() - 1);
         limitRepository.save(limit);
+    }
+
+    @Override
+    @Transactional
+    public void resetLimits() {
+        limitRepository.resetAllLimits();
     }
 
 }
