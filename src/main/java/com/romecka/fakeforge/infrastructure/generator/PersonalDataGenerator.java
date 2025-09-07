@@ -57,12 +57,12 @@ public class PersonalDataGenerator {
         return dataGenerator().internet().emailAddress(emailLocalPart(firstName, lastName));
     }
 
-    public static String personalId(Gender gender) {
+    public static String personalId(Gender gender, int age) {
         return peselGenerator().generateValid(
                 dataGenerator(),
                 new IdNumberRequest(
-                        18,
-                        100,
+                        age,
+                        age + 1,
                         GenderRequest.valueOf(gender.name())
                 )
         ).idNumber();

@@ -2,6 +2,7 @@ package com.romecka.fakeforge.infrastructure.db.person;
 
 import com.romecka.fakeforge.domain.person.People;
 import com.romecka.fakeforge.domain.person.Person;
+import com.romecka.fakeforge.domain.person.PersonParams;
 import com.romecka.fakeforge.domain.person.PersonProvider;
 import com.romecka.fakeforge.infrastructure.db.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,8 @@ public class PersonStorage implements People {
     }
 
     @Override
-    public Person createPerson(long userId) {
-        PersonEntity person = (PersonEntity) personProvider.generateRandomPerson();
+    public Person createPerson(long userId, PersonParams personRequest) {
+        PersonEntity person = (PersonEntity) personProvider.generateRandomPerson(personRequest);
         person.user(userRepository.findById(userId).orElseThrow());
         return personRepository.save(person);
     }

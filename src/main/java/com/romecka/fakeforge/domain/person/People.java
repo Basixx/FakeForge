@@ -8,6 +8,6 @@ public interface People {
                                   int page,
                                   int size);
 
-    Person createPerson(long userId);
+    Person createPerson(long userId, PersonParams personParams);
 
 }

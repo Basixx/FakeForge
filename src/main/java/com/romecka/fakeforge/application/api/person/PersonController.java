@@ -3,6 +3,7 @@ package com.romecka.fakeforge.application.api.person;
 import com.romecka.fakeforge.domain.person.PersonService;
 import com.romecka.fakeforge.domain.user.UserAuthenticationDetails;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,9 @@ public class PersonController {
     @PostMapping(value = "users/persons")
     @ResponseStatus(CREATED)
     @PreAuthorize("hasRole('USER')")
-    public PersonDto createUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails) {
-        return PersonDto.of(personService.createPerson(userDetails.getUserId()));
+    public PersonDto createPerson(@AuthenticationPrincipal UserAuthenticationDetails userDetails,
+                                  @ParameterObject PersonRequest personRequest) {
+        return PersonDto.of(personService.createPerson(userDetails.getUserId(), personRequest));
     }
 
 }
