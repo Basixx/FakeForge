@@ -46,8 +46,8 @@ public class DocumentNumber {
                 + digit(seventhDigit, 10)
                 + digit(eightDigit, 10) * 7
                 + digit(ninthDigit, 10) * 3;
-        int aMod = ((sum % 10) + 10) % 10; // obsłuży również a<0
-        int needed = (10 - aMod) % 10;    // to, co dodajemy do a żeby było ≡ 0
+        int aMod = ((sum % 10) + 10) % 10;
+        int needed = (10 - aMod) % 10;
         return String.valueOf((9 * needed) % 10).charAt(0);
     }
 

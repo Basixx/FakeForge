@@ -2,7 +2,6 @@ package com.romecka.fakeforge.infrastructure.generator;
 
 public enum Bank {
 
-    //    TODO fix bank generating
     // @formatter:off
     NBP               ("Narodowy Bank Polski",          "101"),
     PKO_BP            ("PKO BP",                        "102"),
