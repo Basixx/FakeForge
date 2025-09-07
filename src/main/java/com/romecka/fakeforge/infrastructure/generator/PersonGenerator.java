@@ -35,7 +35,6 @@ public class PersonGenerator implements PersonProvider {
                 .phoneNumber(cellPhoneNumber())
                 .personalId(personalId(gender))
                 .gender(gender)
-                .citizenship("PL")
                 .bankAccountNumber(bankAccountNumber())
                 .street(address.streetName())
                 .buildingNumber(randomInt(1, 100))

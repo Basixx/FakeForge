@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 015
+      author: barbara
+      changes:
+        - dropColumn:
+            tableName: persons
+            columnName: citizenship

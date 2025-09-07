@@ -55,10 +55,6 @@ public class PersonEntity implements Person {
     @NotNull
     Gender gender;
 
-    @Column(length = 2)
-    @NotNull
-    String citizenship;
-
     @Column(length = 28)
     @NotNull
     String bankAccountNumber;
