@@ -24,9 +24,9 @@ public class PersonService {
         );
     }
 
-    public Person createPerson(long userId) {
+    public Person createPerson(long userId, PersonParams personParams) {
         limits.useLimit(userId);
-        return people.createPerson(userId);
+        return people.createPerson(userId, personParams);
     }
 
 }

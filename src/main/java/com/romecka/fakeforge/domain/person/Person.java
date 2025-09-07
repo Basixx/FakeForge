@@ -14,8 +14,6 @@ public interface Person {
 
     Gender gender();
 
-    String citizenship();
-
     String bankAccountNumber();
 
     String documentNumber();

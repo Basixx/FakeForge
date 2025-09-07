@@ -1,6 +1,7 @@
 package com.romecka.fakeforge.infrastructure.generator;
 
 import com.romecka.fakeforge.domain.person.Gender;
+import com.romecka.fakeforge.domain.person.PersonParams;
 import com.romecka.fakeforge.domain.person.PersonProvider;
 import com.romecka.fakeforge.infrastructure.db.person.PersonEntity;
 import lombok.RequiredArgsConstructor;
@@ -22,20 +23,20 @@ import static com.romecka.fakeforge.utils.RandomUtils.randomInt;
 @RequiredArgsConstructor
 public class PersonGenerator implements PersonProvider {
 
-    public PersonEntity generateRandomPerson() {
-        Gender gender = randomEnum(Gender.class);
+    public PersonEntity generateRandomPerson(PersonParams personParams) {
+        Gender gender = personParams.gender() != null ? personParams.gender() : randomEnum(Gender.class);
         String firstName = firstName(gender);
         String lastName = lastName(gender);
         Address address = address();
+        int age = personParams.age() != null ? personParams.age() : randomInt(18, 100);
 
         return new PersonEntity()
                 .name(firstName)
                 .lastName(lastName)
                 .emailAddress(emailAddress(firstName, lastName))
                 .phoneNumber(cellPhoneNumber())
-                .personalId(personalId(gender))
+                .personalId(personalId(gender, age))
                 .gender(gender)
-                .citizenship("PL")
                 .bankAccountNumber(bankAccountNumber())
                 .street(address.streetName())
                 .buildingNumber(randomInt(1, 100))

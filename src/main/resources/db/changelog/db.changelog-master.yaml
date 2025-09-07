@@ -27,3 +27,5 @@ databaseChangeLog:
       file: db/changelog/changeset-013-drop-document-table.yml
   - include:
       file: db/changelog/changeset-014-drop-address-table.yml
+  - include:
+      file: db/changelog/changeset-015-drop-persons-citizenship-column.yml
