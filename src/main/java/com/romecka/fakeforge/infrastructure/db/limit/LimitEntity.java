@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -30,6 +31,7 @@ public class LimitEntity implements Limit {
 
     @NotNull
     @Column(name = "available_limit")
+    @Min(0)
     private int availableLimit = 100;
 
     @OneToOne(mappedBy = "limit")
