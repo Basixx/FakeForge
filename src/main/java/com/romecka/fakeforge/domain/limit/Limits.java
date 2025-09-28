@@ -10,4 +10,6 @@ public interface Limits {
 
     void resetLimits();
 
+    void updateLimit(long id, int limit);
+
 }

@@ -4,6 +4,7 @@ import com.romecka.fakeforge.domain.person.People;
 import com.romecka.fakeforge.domain.person.Person;
 import com.romecka.fakeforge.domain.person.PersonParams;
 import com.romecka.fakeforge.domain.person.PersonProvider;
+import com.romecka.fakeforge.domain.user.UserNotFoundException;
 import com.romecka.fakeforge.infrastructure.db.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class PersonStorage implements People {
     @Override
     public Person createPerson(long userId, PersonParams personRequest) {
         PersonEntity person = (PersonEntity) personProvider.generateRandomPerson(personRequest);
-        person.user(userRepository.findById(userId).orElseThrow());
+        person.user(userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId)));
         return personRepository.save(person);
     }
 

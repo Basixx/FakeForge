@@ -3,6 +3,7 @@ package com.romecka.fakeforge.infrastructure.db.limit;
 import com.romecka.fakeforge.domain.limit.Limit;
 import com.romecka.fakeforge.domain.limit.LimitExceededException;
 import com.romecka.fakeforge.domain.limit.Limits;
+import com.romecka.fakeforge.domain.user.LimitForUserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,25 @@ public class LimitStorage implements Limits {
 
     @Override
     public void useLimit(long userId) {
-        LimitEntity limit = limitRepository.findByUserId(userId).orElseThrow();
+        LimitEntity limit = findLimit(userId);
+        decrementLimit(limit);
+    }
+
+    @Override
+    @Transactional
+    public void resetLimits() {
+        limitRepository.resetAllLimits();
+    }
+
+    @Override
+    @Transactional
+    public void updateLimit(long userId, int dailyLimit) {
+        LimitEntity limit = findLimit(userId);
+        limit.dailyLimit(dailyLimit);
+        limitRepository.save(limit);
+    }
+
+    private void decrementLimit(LimitEntity limit) {
         if (limit.availableLimit() <= 0) {
             throw new LimitExceededException();
         }
@@ -31,10 +50,8 @@ public class LimitStorage implements Limits {
         limitRepository.save(limit);
     }
 
-    @Override
-    @Transactional
-    public void resetLimits() {
-        limitRepository.resetAllLimits();
+    private LimitEntity findLimit(long userId) {
+        return limitRepository.findByUserId(userId).orElseThrow(() -> new LimitForUserNotFoundException(userId));
     }
 
 }

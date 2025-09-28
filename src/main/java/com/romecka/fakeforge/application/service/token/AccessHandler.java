@@ -1,7 +1,7 @@
 package com.romecka.fakeforge.application.service.token;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.romecka.fakeforge.application.api.error.ErrorResponse;
+import com.romecka.fakeforge.application.api.generic.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;

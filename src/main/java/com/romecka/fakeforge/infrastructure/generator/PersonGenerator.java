@@ -18,17 +18,18 @@ import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerat
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.personalId;
 import static com.romecka.fakeforge.utils.RandomUtils.randomEnum;
 import static com.romecka.fakeforge.utils.RandomUtils.randomInt;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @Service
 @RequiredArgsConstructor
 public class PersonGenerator implements PersonProvider {
 
     public PersonEntity generateRandomPerson(PersonParams personParams) {
-        Gender gender = personParams.gender() != null ? personParams.gender() : randomEnum(Gender.class);
+        Gender gender = defaultIfNull(personParams.gender(), randomEnum(Gender.class));
         String firstName = firstName(gender);
         String lastName = lastName(gender);
         Address address = address();
-        int age = personParams.age() != null ? personParams.age() : randomInt(18, 100);
+        int age = defaultIfNull(personParams.age(), randomInt(18, 100));
 
         return new PersonEntity()
                 .name(firstName)

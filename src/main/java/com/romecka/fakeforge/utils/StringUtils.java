@@ -3,6 +3,7 @@ package com.romecka.fakeforge.utils;
 import java.util.Map;
 
 import static java.util.Map.entry;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 public class StringUtils {
 
@@ -35,7 +36,7 @@ public class StringUtils {
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             Character replacement = POLISH_CHARS.get(c);
-            result.append(replacement != null ? replacement : c);
+            result.append(defaultIfNull(replacement, c));
         }
         return result.toString();
     }

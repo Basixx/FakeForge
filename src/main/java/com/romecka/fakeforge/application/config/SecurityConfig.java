@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.application.config.security;
+package com.romecka.fakeforge.application.config;
 
 import com.romecka.fakeforge.application.service.token.AccessHandler;
 import com.romecka.fakeforge.application.service.token.JwtAuthenticationEntryPoint;
