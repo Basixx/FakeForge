@@ -25,8 +25,8 @@ public class UserService {
         return users.registerUser(user);
     }
 
-    public List<User> getUsers() {
-        return users.getUsers();
+    public List<User> getUsers(int page, int size) {
+        return users.getUsers(page, size);
     }
 
     public String authenticateAndGenerateToken(UserAuthenticationParams userParams) {
