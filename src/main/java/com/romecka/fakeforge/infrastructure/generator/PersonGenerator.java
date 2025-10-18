@@ -9,11 +9,11 @@ import net.datafaker.providers.base.Address;
 import org.springframework.stereotype.Service;
 
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.address;
-import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.bankAccountNumber;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.cellPhoneNumber;
-import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.documentNumber;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.emailAddress;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.firstName;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.generateBankAccountNumber;
+import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.generateDocumentNumber;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.lastName;
 import static com.romecka.fakeforge.infrastructure.generator.PersonalDataGenerator.personalId;
 import static com.romecka.fakeforge.utils.RandomUtils.randomEnum;
@@ -30,7 +30,6 @@ public class PersonGenerator implements PersonProvider {
         String lastName = lastName(gender);
         Address address = address();
         int age = defaultIfNull(personParams.age(), randomInt(18, 100));
-
         return new PersonEntity()
                 .name(firstName)
                 .lastName(lastName)
@@ -38,13 +37,13 @@ public class PersonGenerator implements PersonProvider {
                 .phoneNumber(cellPhoneNumber())
                 .personalId(personalId(gender, age))
                 .gender(gender)
-                .bankAccountNumber(bankAccountNumber())
+                .bankAccountNumber(generateBankAccountNumber())
                 .street(address.streetName())
                 .buildingNumber(randomInt(1, 100))
                 .apartmentNumber(randomInt(1, 100))
                 .postalCode(address.zipCode())
                 .city(address.city())
-                .documentNumber(documentNumber());
+                .documentNumber(generateDocumentNumber());
     }
 
 }

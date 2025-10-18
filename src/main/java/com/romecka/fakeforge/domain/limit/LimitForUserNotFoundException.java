@@ -1,4 +1,4 @@
-package com.romecka.fakeforge.domain.user;
+package com.romecka.fakeforge.domain.limit;
 
 public class LimitForUserNotFoundException extends RuntimeException {
 

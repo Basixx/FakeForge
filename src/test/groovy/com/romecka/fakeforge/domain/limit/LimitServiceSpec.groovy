@@ -21,13 +21,11 @@ class LimitServiceSpec extends Specification {
     @Subject
     LimitService limitService = new LimitService(limits)
 
-    void "should invoke get limit for existing user"() {
-        given:
-            limits.getLimit(1) >> Optional.of(primaryLimit)
+    void 'should invoke get limit for existing user'() {
         when:
             Limit result = limitService.getUserLimit(1)
         then:
-            1 * limits.getLimit(1) >> Optional.of(primaryLimit)
+            1 * limits.getLimit(1) >> primaryLimit
         and:
             with(result) {
                 dailyLimit() == 100
@@ -35,33 +33,47 @@ class LimitServiceSpec extends Specification {
             }
     }
 
-    void "should throw LimitNotFoundException when limit does not exist"() {
+    void 'should throw LimitNotFoundException when limit does not exist'() {
         given:
             Long userId = 99L
         when:
             limitService.getUserLimit(userId)
         then:
-            1 * limits.getLimit(userId) >> Optional.empty()
+            1 * limits.getLimit(userId) >> { throw new LimitForUserNotFoundException(userId) }
         and:
-            thrown(LimitNotFoundException)
+            thrown(LimitForUserNotFoundException)
     }
 
-    void "should handle different user IDs correctly"() {
+    void 'should handle different user IDs correctly'() {
         given:
             long userId1 = 123L
             long userId2 = 456L
-        and:
-            limits.getLimit(userId1) >> Optional.of(primaryLimit)
-            limits.getLimit(userId2) >> Optional.of(secondaryLimit)
         when:
             Limit result1 = limitService.getUserLimit(userId1)
             Limit result2 = limitService.getUserLimit(userId2)
         then:
-            1 * limits.getLimit(userId1) >> Optional.of(primaryLimit)
-            1 * limits.getLimit(userId2) >> Optional.of(secondaryLimit)
+            1 * limits.getLimit(userId1) >> primaryLimit
+            1 * limits.getLimit(userId2) >> secondaryLimit
         and:
             result1 == primaryLimit
             result2 == secondaryLimit
+    }
+
+    void 'should invoke reset limits'() {
+        when:
+            limitService.resetLimits()
+        then:
+            1 * limits.resetLimits()
+    }
+
+    void 'should invoke update limit'() {
+        given:
+            long userId = 1
+            int dailyLimit = 200
+        when:
+            limitService.updateLimit(userId, dailyLimit)
+        then:
+            1 * limits.updateLimit(userId, dailyLimit)
     }
 
 }

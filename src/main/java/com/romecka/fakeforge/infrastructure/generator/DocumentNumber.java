@@ -3,7 +3,6 @@ package com.romecka.fakeforge.infrastructure.generator;
 import static com.romecka.fakeforge.utils.RandomUtils.randomDigit;
 import static com.romecka.fakeforge.utils.RandomUtils.randomLetter;
 import static java.lang.Character.digit;
-import static java.lang.String.format;
 
 public class DocumentNumber {
 
@@ -53,8 +52,7 @@ public class DocumentNumber {
 
     @Override
     public String toString() {
-        return format(
-                "%c%c%c%c%c%c%c%c%c",
+        return "%c%c%c%c%c%c%c%c%c".formatted(
                 firstLetter,
                 secondLetter,
                 thirdLetter,

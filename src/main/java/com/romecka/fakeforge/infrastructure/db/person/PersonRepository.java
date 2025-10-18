@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface PersonRepository extends JpaRepository<PersonEntity, Long> {
+public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
     Page<PersonEntity> findByUserId(long userId, Pageable pageable);
 
