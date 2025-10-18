@@ -13,7 +13,7 @@ public class LimitService {
     private final Limits limits;
 
     public Limit getUserLimit(long userId) {
-        return limits.getLimit(userId).orElseThrow(LimitNotFoundException::new);
+        return limits.getLimit(userId);
     }
 
     @Scheduled(cron = "0 0 0 * * *")

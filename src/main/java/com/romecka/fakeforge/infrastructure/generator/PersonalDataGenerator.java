@@ -73,12 +73,12 @@ public class PersonalDataGenerator {
         return dataGenerator().regexify("(45|50|51|52|53|57|60|66|69|72|73|78|79|88)[0-9]{7}");
     }
 
-    public static String bankAccountNumber() {
+    public static String generateBankAccountNumber() {
         Bank bank = randomEnum(Bank.class);
         return new BankAccountNumber(bank).toString();
     }
 
-    public static String documentNumber() {
+    public static String generateDocumentNumber() {
         return new DocumentNumber().toString();
     }
 
