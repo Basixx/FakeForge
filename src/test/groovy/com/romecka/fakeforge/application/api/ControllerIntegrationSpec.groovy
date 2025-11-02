@@ -69,23 +69,27 @@ abstract class ControllerIntegrationSpec extends Specification {
     }
 
     UserEntity saveUser(LimitEntity limitEntity) {
-        UserEntity user = new UserEntity(name: 'name',
+        UserEntity user = new UserEntity(
+            name: 'name',
             lastName: 'lastName',
             emailAddress: USER_EMAIL,
             password: passwordEncoder.encode('pass'),
             role: 'ROLE_USER',
-            limit: limitEntity)
+            limit: limitEntity
+        )
         userRepository.save(user)
     }
 
     UserEntity saveAdmin() {
         LimitEntity adminLimitEntity = new LimitEntity(dailyLimit: 100, availableLimit: 100)
-        UserEntity adminUser = new UserEntity(name: 'name',
+        UserEntity adminUser = new UserEntity(
+            name: 'name',
             lastName: 'lastName',
             emailAddress: ADMIN_EMAIL,
             password: 'pass',
             role: 'ROLE_ADMIN',
-            limit: adminLimitEntity)
+            limit: adminLimitEntity
+        )
         userRepository.save(adminUser)
     }
 

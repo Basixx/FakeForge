@@ -13,3 +13,8 @@ spring:
 jwt:
   secret: testSecret
   expiration: P10D
+
+app:
+  mail:
+    verification:
+      enabled: false

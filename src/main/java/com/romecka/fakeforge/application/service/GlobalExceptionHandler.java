@@ -3,6 +3,8 @@ package com.romecka.fakeforge.application.service;
 import com.romecka.fakeforge.application.api.generic.ErrorResponse;
 import com.romecka.fakeforge.domain.limit.LimitExceededException;
 import com.romecka.fakeforge.domain.limit.LimitForUserNotFoundException;
+import com.romecka.fakeforge.domain.user.EmailAddressInvalidException;
+import com.romecka.fakeforge.domain.user.EmailVerificationFailedException;
 import com.romecka.fakeforge.domain.user.LoginFailedException;
 import com.romecka.fakeforge.domain.user.UserAlreadyExistsException;
 import com.romecka.fakeforge.domain.user.UserNotFoundException;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.TOO_MANY_REQUESTS;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
@@ -40,6 +43,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException ex) {
+        return ResponseEntity.status(BAD_REQUEST).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(EmailVerificationFailedException.class)
+    public ResponseEntity<ErrorResponse> handleEmailVerificationFailed(EmailVerificationFailedException ex) {
+        return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(EmailAddressInvalidException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidEmailAddress(EmailAddressInvalidException ex) {
         return ResponseEntity.status(BAD_REQUEST).body(new ErrorResponse(ex.getMessage()));
     }
 
