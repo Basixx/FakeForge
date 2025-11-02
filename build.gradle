@@ -52,7 +52,6 @@ dependencies {
     testImplementation 'org.spockframework:spock-spring:2.4-M6-groovy-4.0'
     testImplementation 'io.rest-assured:rest-assured:5.5.0'
     testImplementation 'io.rest-assured:spring-mock-mvc:5.5.0'
-
 }
 
 tasks.withType(Checkstyle).configureEach {
@@ -64,4 +63,5 @@ tasks.withType(Checkstyle).configureEach {
 
 tasks.named('test') {
     useJUnitPlatform()
+    jvmArgs '-XX:+EnableDynamicAgentLoading'
 }

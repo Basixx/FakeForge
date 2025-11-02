@@ -2,6 +2,8 @@ package com.romecka.fakeforge.infrastructure.db.user
 
 import com.romecka.fakeforge.domain.limit.LimitProvider
 import com.romecka.fakeforge.domain.user.DataEncoder
+import com.romecka.fakeforge.domain.user.EmailAddressInvalidException
+import com.romecka.fakeforge.domain.user.EmailVerification
 import com.romecka.fakeforge.domain.user.User
 import com.romecka.fakeforge.domain.user.UserNotFoundException
 import com.romecka.fakeforge.domain.user.UserParams
@@ -33,10 +35,13 @@ class UserStorageSpec extends Specification {
 
     LimitProvider limitProvider = Mock()
 
+    EmailVerification emailVerification = Mock()
+
     @Subject
     UserStorage userStorage = new UserStorage(userRepository,
         dataEncoder,
-        limitProvider)
+        limitProvider,
+        emailVerification)
 
     void 'should invoke register user'() {
         given:
@@ -48,6 +53,7 @@ class UserStorageSpec extends Specification {
             1 * limitProvider.generateDefaultLimit() >> limitEntity
             1 * dataEncoder.encode(_ as String)
             1 * userRepository.save(_ as User) >> user
+            1 * emailVerification.verify(_ as String)
         and:
             with(result) {
                 name() == user.name()
@@ -56,6 +62,23 @@ class UserStorageSpec extends Specification {
                 password() == user.password()
                 role() == user.role()
             }
+    }
+
+    void 'should not register user with invalid email'() {
+        given:
+            UserParams userParams = Stub()
+        when:
+            userStorage.registerUser(userParams)
+        then:
+            1 * userRepository.existsByEmailAddress(_ as String) >> false
+            1 * emailVerification.verify(_ as String) >> {
+                throw new EmailAddressInvalidException(_ as String)
+            }
+            0 * limitProvider._
+            0 * dataEncoder._
+            0 * userRepository.save(_ as User)
+        and:
+            thrown(EmailAddressInvalidException)
     }
 
     void 'should invoke get all users'() {
