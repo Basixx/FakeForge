@@ -16,7 +16,7 @@ import lombok.Data;
 
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -50,7 +50,7 @@ public class UserEntity implements User {
     @NotNull
     private String role;
 
-    @OneToOne(cascade = PERSIST)
+    @OneToOne(cascade = ALL, orphanRemoval = true, optional = false)
     @JoinColumn(name = "limit_id")
     private LimitEntity limit;
 
