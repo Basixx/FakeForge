@@ -87,12 +87,10 @@ class UserControllerSpec extends ControllerIntegrationSpec {
 
     void 'should login user and return token'() {
         given:
-            //TODO zobacz czy da sie przez repository
-            performRegisterUserRequest(userRequest)
-                .statusCode(CREATED.value())
+            saveUser()
             when(jwtService.generateToken(USER_EMAIL)).thenReturn('test-jwt-token')
         when:
-            String token = performLoginUsersRequest(new UserAuthenticationRequest(USER_EMAIL, 'password'))
+            String token = performLoginUsersRequest(new UserAuthenticationRequest(USER_EMAIL, 'pass'))
                 .statusCode(OK.value())
                 .extract()
                 .asString()

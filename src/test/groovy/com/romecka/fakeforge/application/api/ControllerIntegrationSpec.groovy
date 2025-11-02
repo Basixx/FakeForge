@@ -13,6 +13,7 @@ import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
@@ -42,6 +43,9 @@ abstract class ControllerIntegrationSpec extends Specification {
     @Autowired
     PersonRepository personRepository
 
+    @Autowired
+    PasswordEncoder passwordEncoder
+
     @MockitoBean
     JWTService jwtService
 
@@ -68,7 +72,7 @@ abstract class ControllerIntegrationSpec extends Specification {
         UserEntity user = new UserEntity(name: 'name',
             lastName: 'lastName',
             emailAddress: USER_EMAIL,
-            password: 'pass',
+            password: passwordEncoder.encode('pass'),
             role: 'ROLE_USER',
             limit: limitEntity)
         userRepository.save(user)
