@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @NotNull Optional<UserEntity> findByEmailAddress(@NotNull String email);
 
+    boolean existsByEmailAddress(@NotNull String email);
+
     @NotNull Page<UserEntity> findAll(@NotNull Pageable pageable);
 
     default List<UserEntity> findAll(int page, int size) {

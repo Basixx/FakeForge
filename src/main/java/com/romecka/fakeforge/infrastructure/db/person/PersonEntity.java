@@ -3,7 +3,6 @@ package com.romecka.fakeforge.infrastructure.db.person;
 import com.romecka.fakeforge.domain.person.Gender;
 import com.romecka.fakeforge.domain.person.Person;
 import com.romecka.fakeforge.infrastructure.db.user.UserEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -81,7 +80,7 @@ public class PersonEntity implements Person {
     @NotNull
     String city;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
