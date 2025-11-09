@@ -4,10 +4,9 @@ import com.romecka.fakeforge.domain.communication.CommunicationService;
 import com.romecka.fakeforge.domain.limit.Limit;
 import com.romecka.fakeforge.domain.limit.Limits;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Transactional
 @Service
@@ -20,7 +19,7 @@ public class PersonService {
 
     private final CommunicationService communicationService;
 
-    public List<Person> getPersonsFromUser(long userId, int page, int size) {
+    public Slice<Person> getPersonsFromUser(long userId, int page, int size) {
         return people.getPersonsOfUser(
                 userId,
                 page,

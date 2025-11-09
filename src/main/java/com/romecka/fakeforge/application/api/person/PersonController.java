@@ -1,10 +1,12 @@
 package com.romecka.fakeforge.application.api.person;
 
+import com.romecka.fakeforge.domain.person.Person;
 import com.romecka.fakeforge.domain.person.PersonService;
 import com.romecka.fakeforge.domain.user.UserAuthenticationDetails;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
+import org.springframework.data.domain.Slice;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +32,8 @@ public class PersonController {
     public PersonsDto getPersonsByUser(@AuthenticationPrincipal UserAuthenticationDetails userDetails,
                                        @RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "10") int size) {
-        return PersonsDto.of(personService.getPersonsFromUser(
-                userDetails.getUserId(),
-                page,
-                size
-        ));
+        Slice<Person> result = personService.getPersonsFromUser(userDetails.getUserId(), page, size);
+        return new PersonsDto(result.map(PersonDto::of).toList(), result.hasNext());
     }
 
     @PostMapping

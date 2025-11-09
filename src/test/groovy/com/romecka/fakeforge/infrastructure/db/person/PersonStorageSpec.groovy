@@ -6,6 +6,9 @@ import com.romecka.fakeforge.domain.person.PersonProvider
 import com.romecka.fakeforge.domain.user.UserNotFoundException
 import com.romecka.fakeforge.infrastructure.db.user.UserEntity
 import com.romecka.fakeforge.infrastructure.db.user.UserRepository
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Slice
+import org.springframework.data.domain.SliceImpl
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -38,34 +41,37 @@ class PersonStorageSpec extends Specification {
     UserRepository userRepository = Mock()
 
     @Subject
-    PersonStorage personStorage = new PersonStorage(
-        personRepository,
+    PersonStorage personStorage = new PersonStorage(personRepository,
         personProvider,
-        userRepository
-    )
+        userRepository)
 
     void 'should invoke find by id'() {
+        given:
+            Slice<PersonEntity> slice = new SliceImpl<>([personEntity], PageRequest.of(0, 10), false)
         when:
-            List<Person> result = personStorage.getPersonsOfUser(userId, 0, 1)
+            Slice<Person> result = personStorage.getPersonsOfUser(userId, 0, 1)
         then:
-            1 * personRepository.findByUserId(userId, 0, 1) >> [personEntity]
+            1 * personRepository.findByUserId(userId, 0, 1) >> slice
         and:
             with(result) {
-                size() == 1
-                with(first) {
-                    name() == personEntity.name()
-                    lastName() == personEntity.lastName()
-                    emailAddress() == personEntity.emailAddress()
-                    phoneNumber() == personEntity.phoneNumber()
-                    personalId() == personEntity.personalId()
-                    gender() == personEntity.gender()
-                    bankAccountNumber() == personEntity.bankAccountNumber()
-                    documentNumber() == personEntity.documentNumber()
-                    street() == personEntity.street()
-                    buildingNumber() == personEntity.buildingNumber()
-                    apartmentNumber() == personEntity.apartmentNumber()
-                    postalCode() == personEntity.postalCode()
-                    city() == personEntity.city()
+                !hasNext()
+                with(content) {
+                    size() == 1
+                    with(first) {
+                        name() == personEntity.name()
+                        lastName() == personEntity.lastName()
+                        emailAddress() == personEntity.emailAddress()
+                        phoneNumber() == personEntity.phoneNumber()
+                        personalId() == personEntity.personalId()
+                        gender() == personEntity.gender()
+                        bankAccountNumber() == personEntity.bankAccountNumber()
+                        documentNumber() == personEntity.documentNumber()
+                        street() == personEntity.street()
+                        buildingNumber() == personEntity.buildingNumber()
+                        apartmentNumber() == personEntity.apartmentNumber()
+                        postalCode() == personEntity.postalCode()
+                        city() == personEntity.city()
+                    }
                 }
             }
     }

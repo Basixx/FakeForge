@@ -3,6 +3,9 @@ package com.romecka.fakeforge.domain.person
 import com.romecka.fakeforge.domain.communication.CommunicationService
 import com.romecka.fakeforge.domain.limit.Limit
 import com.romecka.fakeforge.domain.limit.Limits
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Slice
+import org.springframework.data.domain.SliceImpl
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -55,42 +58,47 @@ class PersonServiceSpec extends Specification {
         communicationService)
 
     void 'should invoke get persons from user'() {
+        given:
+            Slice<Person> slice = new SliceImpl<>([person, secondPerson], PageRequest.of(0, 10), false)
         when:
-            List<Person> result = personService.getPersonsFromUser(1, 0, 10)
+            Slice<Person> result = personService.getPersonsFromUser(1, 0, 10)
         then:
-            1 * people.getPersonsOfUser(1, 0, 10) >> [person, secondPerson]
+            1 * people.getPersonsOfUser(1, 0, 10) >> slice
         and:
             with(result) {
-                size() == 2
-                with(first) {
-                    name() == person.name()
-                    lastName() == person.lastName()
-                    emailAddress() == person.emailAddress()
-                    phoneNumber() == person.phoneNumber()
-                    personalId() == person.personalId()
-                    gender() == person.gender()
-                    bankAccountNumber() == person.bankAccountNumber()
-                    documentNumber() == person.documentNumber()
-                    street() == person.street()
-                    buildingNumber() == person.buildingNumber()
-                    apartmentNumber() == person.apartmentNumber()
-                    postalCode() == person.postalCode()
-                    city() == person.city()
-                }
-                with(last) {
-                    name() == secondPerson.name()
-                    lastName() == secondPerson.lastName()
-                    emailAddress() == secondPerson.emailAddress()
-                    phoneNumber() == secondPerson.phoneNumber()
-                    personalId() == secondPerson.personalId()
-                    gender() == secondPerson.gender()
-                    bankAccountNumber() == secondPerson.bankAccountNumber()
-                    documentNumber() == secondPerson.documentNumber()
-                    street() == secondPerson.street()
-                    buildingNumber() == secondPerson.buildingNumber()
-                    apartmentNumber() == secondPerson.apartmentNumber()
-                    postalCode() == secondPerson.postalCode()
-                    city() == secondPerson.city()
+                !hasNext()
+                with(content) {
+                    size() == 2
+                    with(first) {
+                        name() == person.name()
+                        lastName() == person.lastName()
+                        emailAddress() == person.emailAddress()
+                        phoneNumber() == person.phoneNumber()
+                        personalId() == person.personalId()
+                        gender() == person.gender()
+                        bankAccountNumber() == person.bankAccountNumber()
+                        documentNumber() == person.documentNumber()
+                        street() == person.street()
+                        buildingNumber() == person.buildingNumber()
+                        apartmentNumber() == person.apartmentNumber()
+                        postalCode() == person.postalCode()
+                        city() == person.city()
+                    }
+                    with(last) {
+                        name() == secondPerson.name()
+                        lastName() == secondPerson.lastName()
+                        emailAddress() == secondPerson.emailAddress()
+                        phoneNumber() == secondPerson.phoneNumber()
+                        personalId() == secondPerson.personalId()
+                        gender() == secondPerson.gender()
+                        bankAccountNumber() == secondPerson.bankAccountNumber()
+                        documentNumber() == secondPerson.documentNumber()
+                        street() == secondPerson.street()
+                        buildingNumber() == secondPerson.buildingNumber()
+                        apartmentNumber() == secondPerson.apartmentNumber()
+                        postalCode() == secondPerson.postalCode()
+                        city() == secondPerson.city()
+                    }
                 }
             }
     }
