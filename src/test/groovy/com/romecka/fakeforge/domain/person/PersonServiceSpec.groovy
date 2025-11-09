@@ -1,5 +1,7 @@
 package com.romecka.fakeforge.domain.person
 
+import com.romecka.fakeforge.domain.communication.CommunicationService
+import com.romecka.fakeforge.domain.limit.Limit
 import com.romecka.fakeforge.domain.limit.Limits
 import spock.lang.Specification
 import spock.lang.Subject
@@ -45,8 +47,12 @@ class PersonServiceSpec extends Specification {
 
     Limits limits = Mock()
 
+    CommunicationService communicationService = Mock()
+
     @Subject
-    PersonService personService = new PersonService(people, limits)
+    PersonService personService = new PersonService(people,
+        limits,
+        communicationService)
 
     void 'should invoke get persons from user'() {
         when:
@@ -89,13 +95,19 @@ class PersonServiceSpec extends Specification {
             }
     }
 
-    void 'should invoke create person'() {
+    void 'should invoke create person with email'() {
         given:
             PersonParams personParams = Stub()
+            Limit limit = Stub {
+                availableLimit() >> 10
+            }
+            String email = 'user@email.com'
         when:
-            Person result = personService.createPerson(1L, personParams)
+            Person result = personService.createPerson(1L, email, personParams)
         then:
             1 * limits.useLimit(1L)
+            1 * limits.getLimit(1L) >> limit
+            1 * communicationService.sendLimitReachingEmail(email, 10)
             1 * people.createPerson(1L, personParams) >> person
         and:
             with(result) {
@@ -114,4 +126,39 @@ class PersonServiceSpec extends Specification {
                 city() == person.city()
             }
     }
+
+    void 'should invoke create person without email'() {
+        given:
+            PersonParams personParams = Stub()
+            Limit limit = Stub {
+                availableLimit() >> availableLimit
+            }
+            String email = 'user@email.com'
+        when:
+            Person result = personService.createPerson(1L, email, personParams)
+        then:
+            1 * limits.useLimit(1L)
+            1 * limits.getLimit(1L) >> limit
+            0 * communicationService.sendLimitReachingEmail(email, 10)
+            1 * people.createPerson(1L, personParams) >> person
+        and:
+            with(result) {
+                name() == person.name()
+                lastName() == person.lastName()
+                emailAddress() == person.emailAddress()
+                phoneNumber() == person.phoneNumber()
+                personalId() == person.personalId()
+                gender() == person.gender()
+                bankAccountNumber() == person.bankAccountNumber()
+                documentNumber() == person.documentNumber()
+                street() == person.street()
+                buildingNumber() == person.buildingNumber()
+                apartmentNumber() == person.apartmentNumber()
+                postalCode() == person.postalCode()
+                city() == person.city()
+            }
+        where:
+            availableLimit << [1, 9, 11, 50]
+    }
+
 }

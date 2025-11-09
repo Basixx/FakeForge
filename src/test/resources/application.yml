@@ -18,3 +18,5 @@ app:
   mail:
     verification:
       enabled: false
+    sending:
+      enabled: false
