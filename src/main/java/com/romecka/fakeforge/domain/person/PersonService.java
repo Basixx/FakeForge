@@ -3,7 +3,6 @@ package com.romecka.fakeforge.domain.person;
 import com.romecka.fakeforge.domain.communication.CommunicationService;
 import com.romecka.fakeforge.domain.limit.Limit;
 import com.romecka.fakeforge.domain.limit.Limits;
-import com.romecka.fakeforge.domain.user.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,6 @@ public class PersonService {
     private final People people;
 
     private final Limits limits;
-
-    private final Users users;
 
     private final CommunicationService communicationService;
 

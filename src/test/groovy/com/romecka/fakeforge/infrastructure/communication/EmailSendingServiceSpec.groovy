@@ -5,9 +5,10 @@ import ch.qos.logback.classic.Logger
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.read.ListAppender
 import com.romecka.fakeforge.domain.communication.Mail
+import jakarta.mail.Session
+import jakarta.mail.internet.MimeMessage
 import org.slf4j.LoggerFactory
 import org.springframework.mail.MailException
-import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import spock.lang.Specification
 import spock.lang.Subject
@@ -24,13 +25,18 @@ class EmailSendingServiceSpec extends Specification {
     EmailSendingService emailSendingService = new EmailSendingService(javaMailSender)
 
     void 'should send an email'() {
+        given:
+            MimeMessage mimeMessage = new MimeMessage((Session) null)
+            javaMailSender.createMimeMessage() >> mimeMessage
         when:
             emailSendingService.sendEmail(mail)
         then:
-            1 * javaMailSender.send({ SimpleMailMessage msg ->
-                assert msg.to == [mail.mailTo()] as String[]
-                assert msg.subject == mail.subject()
-                assert msg.text == mail.message()
+            1 * javaMailSender.send({ MimeMessage msg ->
+                assert msg.getAllRecipients()*.address == [mail.mailTo()]
+                assert msg.getSubject() == mail.subject()
+                def content = msg.getContent()
+                assert content instanceof String
+                assert content == mail.message()
                 true
             })
     }
@@ -41,7 +47,9 @@ class EmailSendingServiceSpec extends Specification {
             ListAppender<ILoggingEvent> appender = new ListAppender<>()
             appender.start()
             logger.addAppender(appender)
-            javaMailSender.send(_ as SimpleMailMessage) >> {
+            MimeMessage mimeMessage = new MimeMessage((Session) null)
+            javaMailSender.createMimeMessage() >> mimeMessage
+            javaMailSender.send(_ as MimeMessage) >> {
                 throw new MailException("mail exception") {
                 }
             }
