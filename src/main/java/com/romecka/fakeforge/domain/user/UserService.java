@@ -1,5 +1,6 @@
 package com.romecka.fakeforge.domain.user;
 
+import com.romecka.fakeforge.domain.communication.CommunicationService;
 import com.romecka.fakeforge.domain.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,8 +22,12 @@ public class UserService {
 
     private final TokenService tokenService;
 
+    private final CommunicationService communicationService;
+
     public User registerUser(UserParams user) {
-        return users.registerUser(user);
+        User registeredUser = users.registerUser(user);
+        communicationService.sendRegistrationEmail(registeredUser.emailAddress(), registeredUser.name());
+        return registeredUser;
     }
 
     public List<User> getUsers(int page, int size) {

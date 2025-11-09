@@ -1,34 +1,38 @@
-package com.romecka.fakeforge.infrastructure.api.email
+package com.romecka.fakeforge.infrastructure.communication
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.Logger
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.read.ListAppender
+import com.romecka.fakeforge.domain.communication.Mail
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
 import spock.lang.Subject
 
-class EmailVerificationLoggingServiceSpec extends Specification {
+class EmailSendingLoggingServiceSpec extends Specification {
 
     @Subject
-    EmailVerificationLoggingService service = new EmailVerificationLoggingService()
+    EmailSendingLoggingService service = new EmailSendingLoggingService()
 
     void 'should log info of disabled feature'() {
         given:
-            String email = 'email@example.com'
-            Logger logger = (Logger) LoggerFactory.getLogger(EmailVerificationLoggingService)
+            Mail mail = new Mail(
+                'user@mail.com',
+                'subject',
+                'body'
+            )
+            Logger logger = (Logger) LoggerFactory.getLogger(EmailSendingLoggingService)
             ListAppender<ILoggingEvent> appender = new ListAppender<>()
             appender.start()
             logger.addAppender(appender)
         when:
-            service.verify(email)
+            service.sendEmail(mail)
         then:
             noExceptionThrown()
             appender.list.size() == 1
             with(appender.list.first()) {
                 level == Level.INFO
-                formattedMessage.contains("Email verification disabled, no validation provided for address")
+                formattedMessage.contains("Email sending disabled, skipping email to")
             }
     }
-
 }

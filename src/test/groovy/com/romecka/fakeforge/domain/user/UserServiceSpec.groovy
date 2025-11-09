@@ -1,5 +1,6 @@
 package com.romecka.fakeforge.domain.user
 
+import com.romecka.fakeforge.domain.communication.CommunicationService
 import com.romecka.fakeforge.domain.token.TokenService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -33,8 +34,13 @@ class UserServiceSpec extends Specification {
 
     TokenService tokenService = Mock()
 
+    CommunicationService communicationService = Mock()
+
     @Subject
-    UserService userService = new UserService(users, authenticationManager, tokenService)
+    UserService userService = new UserService(users,
+        authenticationManager,
+        tokenService,
+        communicationService)
 
     void 'should invoke register user'() {
         given:
@@ -43,6 +49,7 @@ class UserServiceSpec extends Specification {
             User result = userService.registerUser(userParams)
         then:
             1 * users.registerUser(userParams) >> user
+            1 * communicationService.sendRegistrationEmail(user.emailAddress(), user.name())
         and:
             with(result) {
                 id() == user.id()
@@ -100,7 +107,10 @@ class UserServiceSpec extends Specification {
         when:
             userService.authenticateAndGenerateToken(authenticationParams)
         then:
-            1 * authenticationManager.authenticate(_ as UsernamePasswordAuthenticationToken) >> { throw new AuthenticationException('fail') {} }
+            1 * authenticationManager.authenticate(_ as UsernamePasswordAuthenticationToken) >> {
+                throw new AuthenticationException('fail') {
+                }
+            }
             0 * tokenService.generateToken(_)
         and:
             thrown(LoginFailedException)

@@ -41,4 +41,26 @@ public class StringUtils {
         return result.toString();
     }
 
+    public static String mask(String value, int keepStart, int keepEnd) {
+        if (value == null) return null;
+        if (keepStart < 0 || keepEnd < 0) throw new IllegalArgumentException("keepStart/keepEnd must be >= 0");
+
+        int len = value.length();
+        if (len == 0) return value;
+        if (keepStart + keepEnd >= len) {
+            return "***";
+        }
+
+        int starsCount = len - keepStart - keepEnd;
+        StringBuilder sb = new StringBuilder(len);
+        if (keepStart > 0) sb.append(value, 0, Math.min(keepStart, len));
+        sb.append("*".repeat(Math.max(0, starsCount)));
+        if (keepEnd > 0) sb.append(value, len - keepEnd, len);
+        return sb.toString();
+    }
+
+    public static String mask(String value) {
+        return mask(value, 3, 1);
+    }
+
 }

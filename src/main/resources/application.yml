@@ -17,6 +17,18 @@ spring:
     jdbc:
       repositories:
         enabled: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties.mail.smtp:
+      connecttimeout: 5000
+      timeout: 3000
+      writetimeout: 5000
+      starttls.enable: true
+      auth: true
+      ssl.trust: smtp.gmail.com
+    password: ${FAKEFORGE_MAIL_PASSWORD}
+    username: ${FAKEFORGE_MAIL_USERNAME}
 
 management:
   endpoints:
@@ -37,3 +49,5 @@ app:
   mail:
     verification:
       enabled: ${VERIFY_EMAIL:true}
+    sending:
+      enabled: ${SEND_EMAIL:true}

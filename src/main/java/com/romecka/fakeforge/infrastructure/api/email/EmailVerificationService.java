@@ -15,7 +15,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "app.mail.verification.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        name = "app.mail.verification.enabled",
+        havingValue = "true",
+        matchIfMissing = true
+)
 public class EmailVerificationService implements EmailVerification {
 
     private final RestTemplate restTemplate;
