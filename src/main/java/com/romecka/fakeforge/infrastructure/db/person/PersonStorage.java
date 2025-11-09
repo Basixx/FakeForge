@@ -7,9 +7,8 @@ import com.romecka.fakeforge.domain.person.PersonProvider;
 import com.romecka.fakeforge.domain.user.UserNotFoundException;
 import com.romecka.fakeforge.infrastructure.db.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +21,9 @@ public class PersonStorage implements People {
     private final UserRepository userRepository;
 
     @Override
-    public List<Person> getPersonsOfUser(long userId, int page, int size) {
+    public Slice<Person> getPersonsOfUser(long userId, int page, int size) {
         return personRepository.findByUserId(userId, page, size)
-                .stream()
-                .map(entity -> (Person) entity)
-                .toList();
+                .map(entity -> (Person) entity);
     }
 
     @Override
