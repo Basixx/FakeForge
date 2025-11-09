@@ -20,4 +20,9 @@ public class CommunicationService {
         emailSender.sendEmail(emailTemplate.createRegistrationEmail(emailAddress, name));
     }
 
+    public void sendLimitReachingEmail(String emailAddress, int limit) {
+        log.info("Sending limit reaching email to {}", mask(emailAddress));
+        emailSender.sendEmail(emailTemplate.createLimitReachingEmail(emailAddress, limit));
+    }
+
 }

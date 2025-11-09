@@ -42,7 +42,7 @@ public class PersonController {
     @PreAuthorize("hasRole('USER')")
     public PersonDto createPerson(@AuthenticationPrincipal UserAuthenticationDetails userDetails,
                                   @ParameterObject @Valid PersonRequest personRequest) {
-        return PersonDto.of(personService.createPerson(userDetails.getUserId(), personRequest));
+        return PersonDto.of(personService.createPerson(userDetails.getUserId(), userDetails.getUsername(), personRequest));
     }
 
 }
