@@ -75,15 +75,15 @@ class PersonRepositorySpec extends Specification {
             with(result) {
                 size() == 2
                 with(first()) {
-                    id() == firstPerson.id()
-                    name() == firstPerson.name()
-                    lastName() == firstPerson.lastName()
-                    user.id() == user.id()
-                }
-                with(last()) {
                     id() == secondPerson.id()
                     name() == secondPerson.name()
                     lastName() == secondPerson.lastName()
+                    user.id() == user.id()
+                }
+                with(last()) {
+                    id() == firstPerson.id()
+                    name() == firstPerson.name()
+                    lastName() == firstPerson.lastName()
                     user.id() == user.id()
                 }
             }

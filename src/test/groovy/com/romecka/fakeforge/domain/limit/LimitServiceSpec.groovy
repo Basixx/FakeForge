@@ -1,6 +1,5 @@
 package com.romecka.fakeforge.domain.limit
 
-
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -28,8 +27,8 @@ class LimitServiceSpec extends Specification {
             1 * limits.getLimit(1) >> primaryLimit
         and:
             with(result) {
-                dailyLimit() == 100
-                availableLimit() == 50
+                dailyLimit() == primaryLimit.dailyLimit()
+                availableLimit() == primaryLimit.availableLimit()
             }
     }
 
@@ -39,7 +38,9 @@ class LimitServiceSpec extends Specification {
         when:
             limitService.getUserLimit(userId)
         then:
-            1 * limits.getLimit(userId) >> { throw new LimitForUserNotFoundException(userId) }
+            1 * limits.getLimit(userId) >> {
+                throw new LimitForUserNotFoundException(userId)
+            }
         and:
             thrown(LimitForUserNotFoundException)
     }

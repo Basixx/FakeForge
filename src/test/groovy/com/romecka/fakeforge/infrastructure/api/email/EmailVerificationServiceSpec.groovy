@@ -58,7 +58,9 @@ class EmailVerificationServiceSpec extends Specification {
             thrown(EmailVerificationFailedException)
     }
 
-    private static void setField(Object target, String name, Object value) {
+    private static void setField(Object target,
+                                 String name,
+                                 Object value) {
         Field f = target.class.getDeclaredField(name)
         f.accessible = true
         f.set(target, value)
