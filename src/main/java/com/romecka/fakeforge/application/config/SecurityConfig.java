@@ -83,8 +83,6 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-        // Option A: zakładamy, że wartości są dostarczone w application.yml / ENV
         configuration.setAllowedOrigins(corsProperties.getAllowedOrigins());
         configuration.setAllowedOriginPatterns(corsProperties.getAllowedOriginPatterns());
         configuration.setAllowedMethods(corsProperties.getAllowedMethods());

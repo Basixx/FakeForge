@@ -18,7 +18,8 @@ class PersonControllerSpec extends ControllerIntegrationSpec {
     void 'should return list of persons for authenticated user'() {
         given:
             UserEntity user = saveUser()
-            PersonEntity personEntity = new PersonEntity(name: 'Olaf',
+            PersonEntity personEntity = new PersonEntity(
+                name: 'Olaf',
                 lastName: 'Kozak',
                 emailAddress: 'email',
                 phoneNumber: '111222999',
@@ -31,7 +32,8 @@ class PersonControllerSpec extends ControllerIntegrationSpec {
                 apartmentNumber: 12,
                 postalCode: '02-123',
                 city: 'Warszawa',
-                user: user)
+                user: user
+            )
             personRepository.save(personEntity)
             PersonEntity secondPersonEntity = new PersonEntity(
                 name: 'Mariola',
@@ -58,21 +60,6 @@ class PersonControllerSpec extends ControllerIntegrationSpec {
             with(result.persons()) {
                 size() == 2
                 with(first) {
-                    name() == personEntity.name()
-                    lastName() == personEntity.lastName()
-                    emailAddress() == personEntity.emailAddress()
-                    phoneNumber() == personEntity.phoneNumber()
-                    personalId() == personEntity.personalId()
-                    gender() == personEntity.gender()
-                    bankAccountNumber() == personEntity.bankAccountNumber()
-                    documentNumber() == personEntity.documentNumber()
-                    address().street() == personEntity.street()
-                    address().buildingNumber() == personEntity.buildingNumber()
-                    address().apartmentNumber() == personEntity.apartmentNumber()
-                    address().postalCode() == personEntity.postalCode()
-                    address().city() == personEntity.city()
-                }
-                with(last) {
                     name() == secondPersonEntity.name()
                     lastName() == secondPersonEntity.lastName()
                     emailAddress() == secondPersonEntity.emailAddress()
@@ -86,6 +73,21 @@ class PersonControllerSpec extends ControllerIntegrationSpec {
                     address().apartmentNumber() == secondPersonEntity.apartmentNumber()
                     address().postalCode() == secondPersonEntity.postalCode()
                     address().city() == secondPersonEntity.city()
+                }
+                with(last) {
+                    name() == personEntity.name()
+                    lastName() == personEntity.lastName()
+                    emailAddress() == personEntity.emailAddress()
+                    phoneNumber() == personEntity.phoneNumber()
+                    personalId() == personEntity.personalId()
+                    gender() == personEntity.gender()
+                    bankAccountNumber() == personEntity.bankAccountNumber()
+                    documentNumber() == personEntity.documentNumber()
+                    address().street() == personEntity.street()
+                    address().buildingNumber() == personEntity.buildingNumber()
+                    address().apartmentNumber() == personEntity.apartmentNumber()
+                    address().postalCode() == personEntity.postalCode()
+                    address().city() == personEntity.city()
                 }
             }
     }

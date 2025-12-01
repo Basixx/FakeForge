@@ -37,10 +37,12 @@ class UserServiceSpec extends Specification {
     CommunicationService communicationService = Mock()
 
     @Subject
-    UserService userService = new UserService(users,
+    UserService userService = new UserService(
+        users,
         authenticationManager,
         tokenService,
-        communicationService)
+        communicationService
+    )
 
     void 'should invoke register user'() {
         given:

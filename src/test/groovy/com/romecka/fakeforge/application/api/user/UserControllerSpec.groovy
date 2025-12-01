@@ -2,6 +2,7 @@ package com.romecka.fakeforge.application.api.user
 
 import com.romecka.fakeforge.application.api.ControllerIntegrationSpec
 import com.romecka.fakeforge.application.api.generic.ErrorResponse
+import com.romecka.fakeforge.domain.user.User
 import com.romecka.fakeforge.infrastructure.db.user.UserEntity
 import io.restassured.module.mockmvc.response.ValidatableMockMvcResponse
 
@@ -28,11 +29,20 @@ class UserControllerSpec extends ControllerIntegrationSpec {
                 .statusCode(CREATED.value())
                 .extract()
                 .as(UserResponse)
+            Optional<User> registeredUser = userRepository.findByEmailAddress(USER_EMAIL)
         then:
             with(result) {
                 name() == userRequest.name()
                 lastName() == userRequest.lastName()
                 emailAddress() == userRequest.emailAddress()
+            }
+            with(registeredUser) {
+                !empty()
+                with(get()) {
+                    id() != null
+                    name() == userRequest.name()
+                    lastName() == userRequest.lastName()
+                }
             }
     }
 

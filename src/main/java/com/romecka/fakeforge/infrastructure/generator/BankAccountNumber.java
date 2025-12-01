@@ -12,7 +12,7 @@ public class BankAccountNumber {
     private static final String PL_CODE = "252100";
 
     private final Bank bank;
-    
+
     private final String controlSum;
 
     private final String bankBranchCode;
@@ -45,11 +45,13 @@ public class BankAccountNumber {
     }
 
     private String customerNumber() {
-        return dataGenerator().numerify("################");
+        return dataGenerator().regexify("[0-9]{16}");
     }
 
     private String controlSum() {
-        int result = 98 - modulo(bankBranchCode.concat(customerNumber).concat(PL_CODE));
+        int result = 98 - modulo(bankBranchCode
+                .concat(customerNumber)
+                .concat(PL_CODE));
         return result >= 10 ? valueOf(result) : result + "0";
     }
 
