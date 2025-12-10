@@ -17,13 +17,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(value = "users/register")
+    @PostMapping(value = "/users/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse registerUser(@RequestBody UserRequest userRequest) {
         return UserResponse.of(userService.registerUser(userRequest));
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ADMIN')")
     public UsersResponse getUsers(@RequestParam(defaultValue = "0") int page,
@@ -31,7 +31,7 @@ public class UserController {
         return UsersResponse.of(userService.getUsers(page, size));
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public String getUserInfo(@RequestBody UserAuthenticationRequest authenticationRequest) {
         return userService.authenticateAndGenerateToken(authenticationRequest);

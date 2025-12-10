@@ -31,7 +31,7 @@ LimitController {
         return LimitResponse.of(limitService.getUserLimit(userDetails.getUserId()));
     }
 
-    @PutMapping(value = "{userId}/limit")
+    @PutMapping(value = "/{userId}/limit")
     @ResponseStatus(OK)
     @PreAuthorize("hasRole('ADMIN')")
     public MessageResponse editUserLimit(@PathVariable long userId, @RequestParam int dailyLimit) {
