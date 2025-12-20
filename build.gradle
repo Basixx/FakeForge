@@ -67,3 +67,22 @@ tasks.named('test') {
     useJUnitPlatform()
     jvmArgs '-XX:+EnableDynamicAgentLoading'
 }
+
+tasks.named('bootRun') {
+    doFirst {
+        def envFile = file(".env")
+        if (!envFile.exists()) {
+            logger.lifecycle(".env.local not found – skipping")
+            return
+        }
+
+        def props = new Properties()
+        envFile.withInputStream {
+            props.load(it)
+        }
+
+        props.each { k, v ->
+            environment k.toString(), v.toString().replace('\'', '')
+        }
+    }
+}

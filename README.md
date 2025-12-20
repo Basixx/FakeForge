@@ -69,7 +69,8 @@ wiadomości e-mail), DataFaker, Spock (Groovy) do testów, Docker/Docker Compose
     - Link do pobierania:
       https://dev.mysql.com/downloads/mysql/
 - Docker oraz Docker Compose (zalecane dla najłatwiejszego startu)
-    - link do instalacji: https://docs.docker.com/compose/install/
+    - Link do instalacji:
+      https://docs.docker.com/compose/install/
 
 ## Konfiguracja
 
@@ -83,12 +84,12 @@ Skopiuj szablon środowiska i wypełnij wartości:
   Dowolne wartości ustalone przez osobę uruchamiającą, pamiętając o nieupublicznianiu ich.
     - `MYSQL_DATABASE` - nazwa bazy danych
     - `MYSQL_ROOT_PASSWORD` - hasło użytkownika root
-    - `DB_USER` - nazwa użytkownika bazy danych
-    - `DB_PASSWORD` - hasło użytkownika bazy danych `DB_USER`
+    - `MYSQL_USER` - nazwa użytkownika bazy danych
+    - `MYSQL_PASSWORD` - hasło użytkownika bazy danych `MYSQL_USER`
 
 - JWT:
 
-  Poufny ciąg znaków używany do cyfrowego podpisywania i weryfikacji tokenów JWT, polecany
+  Poufny ciąg znaków używany do cyfrowego podpisywania i weryfikacji tokenów JWT. Polecany
   generator: https://jwtsecrets.com/
     - `JWT_SECRET` - klucz tajny
 
@@ -149,14 +150,11 @@ docker-compose down
 ### Opcja B: Uruchomienie lokalne (bez Dockera)
 
 1) Zapewnij działającą instancję MySQL i stwórz bazę danych (zgodnie z `MYSQL_DATABASE`)
-2) Wyeksportuj wymagane zmienne środowiskowe, tak by Spring mógł się do nich podłączyć
-   -
-   `SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/<YOUR_DB>?serverTimezone=Europe/Warsaw&useSSL=False&allowPublicKeyRetrieval=true`
-    - `MYSQL_USER=<your_db_user>`
-    - `MYSQL_PASSWORD=<your_db_password>`
-    - `JWT_SECRET=<your_secret>`
-    - Opcjonalnie: wysyłka i weryfikacja adresu email jak w Konfiguracji
-3) Uruchom aplikację
+
+   tutorial: https://dev.mysql.com/doc/mysql-getting-started/en/
+2) Wyeksportuj wymagane zmienne środowiskowe z pliku `.env.example`, tak by Spring mógł się do nich podłączyć.
+
+3) Uruchom aplikację:
 
 ```bash
 ./gradlew bootRun
@@ -280,22 +278,64 @@ DataFaker, Spock (Groovy) for tests, Docker/Docker Compose.
 ## Requirements
 
 - JDK 21
+    - Link to download:
+      https://www.oracle.com/java/technologies/downloads/#java21
 - Gradle Wrapper (provided)
 - MySQL 8.x (if running locally without Docker)
+    - Link to download:
+      https://dev.mysql.com/downloads/mysql/
 - Docker and Docker Compose (recommended for the easiest start)
+    - Link to installation:
+      https://docs.docker.com/compose/install/
 
 ## Configuration
 
-1) Copy the environment template and fill values:
+Copy the environment template and fill values:
 
-- Duplicate `.env.example` to `.env` in the project root
-- Set the variables as needed. Key ones:
-    - Database: `MYSQL_DATABASE`, `MYSQL_ROOT_PASSWORD`, `DB_USER`, `DB_PASSWORD`
-    - JWT: `JWT_SECRET`
-    - Email sending: `SEND_EMAIL` (true/false), `FAKEFORGE_MAIL_USERNAME`, `FAKEFORGE_MAIL_PASSWORD`
-    - Email verification: `VERIFY_EMAIL` (true/false), `MAIL_API_KEY`
-    - CORS (optional, defaults exist): `APP_CORS_ALLOWED_ORIGINS`, `APP_CORS_ALLOWED_METHODS`,
-      `APP_CORS_ALLOWED_HEADERS`, `APP_CORS_EXPOSED_HEADERS`, `APP_CORS_ALLOW_CREDENTIALS`, `APP_CORS_MAX_AGE`
+1) Duplicate `.env.example` to `.env` in the project root
+2) Set the variables as needed. Key ones:
+
+- Database:
+
+  Any values set by the person running it, remembering not to make them public.
+    - `MYSQL_DATABASE` - database name
+    - `MYSQL_ROOT_PASSWORD` - root user password
+    - `MYSQL_USER` - database user name
+    - `MYSQL_PASSWORD` - database user password
+
+- JWT:
+
+  A secret string used to digitally sign and verify JWT tokens. Recommended generator: https://jwtsecrets.com/
+    - `JWT_SECRET` - secret key
+
+- Email sending:
+
+  The email sending feature is optional and can be enabled using the variables below.
+
+  Instructions for creating an email account and obtaining a password for the Gmail app:
+
+  https://support.google.com/mail/answer/56256
+
+  https://support.google.com/mail/answer/185833
+    - `SEND_EMAIL` (true/false) - a variable used to enable/disable the functionality of sending email messages
+    - `FAKEFORGE_MAIL_USERNAME` - the email address from which the application sends emails. This is required if the
+      functionality is enabled; otherwise, it can be left blank.
+    - `FAKEFORGE_MAIL_PASSWORD` - the password of the email account from which the application sends messages, required
+      if the functionality is enabled; otherwise, it can be left blank.
+
+- Email verification:
+
+  The email verification feature is optional and can be enabled using the variables below.
+
+  Instructions for obtaining an API key for email verification:
+
+  Create an account at https://emailverification.whoisxmlapi.com/api/signup. After successful registration, go to the
+  `My Products` tab. At the top of the page, you will see the generated API key required for this feature to work.
+
+  **Important!** The free version of the website account allows for 100 email address validation requests at a time.
+
+    - `VERIFY_EMAIL` (true/false) - a variable used to enable/disable the functionality of sending email messages
+    - `MAIL_API_KEY` - API key obtained from https://emailverification.whoisxmlapi.com/
 
 The application reads configuration from `src/main/resources/application.yml` and environment variables.
 
@@ -307,7 +347,7 @@ The application reads configuration from `src/main/resources/application.yml` an
 2) Start the stack:
 
 ```bash
-docker compose up --build
+docker-compose up -d --build
 ```
 
 Services and ports:
@@ -315,16 +355,19 @@ Services and ports:
 - App: http://localhost:8080 (debug port 5005 exposed)
 - MySQL: localhost:3307 (container internal port 3306)
 
+To stop the containers, run
+
+```bash
+docker-compose down
+````
+
 ### Option B: Local run (without Docker)
 
 1) Provide a running MySQL instance and create a database (matches `MYSQL_DATABASE`)
-2) Export required environment variables so Spring can connect:
-   -
-   `SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/<YOUR_DB> serverTimezone=Europe/Warsaw&useSSL=False&allowPublicKeyRetrieval=true`
-    - `MYSQL_USER=<your_db_user>`
-    - `MYSQL_PASSWORD=<your_db_password>`
-    - `JWT_SECRET=<your_secret>`
-    - Optionally: mail and verification variables as in Configuration
+
+   tutorial: https://dev.mysql.com/doc/mysql-getting-started/en/
+2) Export required environment variables from `.env.example` file so Spring can connect.
+
 3) Run the app:
 
 ```bash
@@ -413,10 +456,6 @@ Example flow (assuming app on localhost:8080):
 - Admin endpoints:
     - List users (ADMIN role): `GET /users?page=0&size=10`
     - Edit user limit (ADMIN role): `PUT /users/{userId}/limit?dailyLimit=25`
-
-If OpenAPI UI is enabled, it will be available at:
-
-http://localhost:8080/swagger-ui/index.html
 
 ## Database & Migrations
 
