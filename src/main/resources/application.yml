@@ -1,7 +1,7 @@
 spring:
   application.name: FakeForge
   datasource:
-    url: ${SPRING_DATASOURCE_URL}?serverTimezone=Europe/Warsaw&useSSL=False&allowPublicKeyRetrieval=true
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3307}/${MYSQL_DATABASE}?serverTimezone=Europe/Warsaw&useSSL=False&allowPublicKeyRetrieval=true
     username: ${MYSQL_USER}
     password: ${MYSQL_PASSWORD}
   jpa:
@@ -27,8 +27,8 @@ spring:
       starttls.enable: true
       auth: true
       ssl.trust: smtp.gmail.com
-    password: ${FAKEFORGE_MAIL_PASSWORD}
     username: ${FAKEFORGE_MAIL_USERNAME}
+    password: ${FAKEFORGE_MAIL_PASSWORD}
 
 management:
   endpoints:
