@@ -1,8 +1,13 @@
 # FakeForge
 
+---
+
+# Spis treści / Table of contents
+
 <!-- TOC -->
 
 * [FakeForge](#fakeforge)
+* [Spis treści / Table of contents](#spis-treści--table-of-contents)
 * [Polski](#polski)
     * [Opis](#opis)
     * [Wymagania](#wymagania)
@@ -34,9 +39,11 @@
 
 <!-- TOC -->
 
+---
+
 # Polski
 
-**English version below.**
+**English version below.** ⬇
 
 ## Opis
 
@@ -55,22 +62,65 @@ wiadomości e-mail), DataFaker, Spock (Groovy) do testów, Docker/Docker Compose
 ## Wymagania
 
 - JDK 21
-- Gradle Wrapper (provided)
-- MySQL 8.x (if running locally without Docker)
+    - Link do pobierania:
+      https://www.oracle.com/java/technologies/downloads/#java21
+- Gradle Wrapper (zapewniony)
+- MySQL 8.x (jeśli uruchamiane lokalnie bez Dockera)
+    - Link do pobierania:
+      https://dev.mysql.com/downloads/mysql/
 - Docker oraz Docker Compose (zalecane dla najłatwiejszego startu)
+    - link do instalacji: https://docs.docker.com/compose/install/
 
 ## Konfiguracja
 
-1) Skopiuj szablon środowiska i wypełnij wartości:
+Skopiuj szablon środowiska i wypełnij wartości:
 
-- Skopiuj plik `.env.example` do pliku `.env` w katalogu głównym projektu.
-- Ustaw zmienne zgodnie z potrzebami. Kluczowe:
-    - Baza danych: `MYSQL_DATABASE`, `MYSQL_ROOT_PASSWORD`, `DB_USER`, `DB_PASSWORD`
-    - JWT: `JWT_SECRET`
-    - Wysyłanie wiadomości e-mail: `SEND_EMAIL` (prawda/fałsz), `FAKEFORGE_MAIL_USERNAME`, `FAKEFORGE_MAIL_PASSWORD`
-    - Weryfikacja adresu e-mail: `VERIFY_EMAIL` (prawda/fałsz), `MAIL_API_KEY`
-    - CORS (opcjonalny, istnieją wartości domyślne): `APP_CORS_ALLOWED_ORIGINS`, `APP_CORS_ALLOWED_METHODS`,
-      `APP_CORS_ALLOWED_HEADERS`, `APP_CORS_EXPOSED_HEADERS`, `APP_CORS_ALLOW_CREDENTIALS`, `APP_CORS_MAX_AGE`
+1) Skopiuj plik `.env.example` do pliku `.env` w katalogu głównym projektu.
+2) Ustaw zmienne zgodnie z potrzebami. Kluczowe:
+
+- Baza danych:
+
+  Dowolne wartości ustalone przez osobę uruchamiającą, pamiętając o nieupublicznianiu ich.
+    - `MYSQL_DATABASE` - nazwa bazy danych
+    - `MYSQL_ROOT_PASSWORD` - hasło użytkownika root
+    - `DB_USER` - nazwa użytkownika bazy danych
+    - `DB_PASSWORD` - hasło użytkownika bazy danych `DB_USER`
+
+- JWT:
+
+  Poufny ciąg znaków używany do cyfrowego podpisywania i weryfikacji tokenów JWT, polecany
+  generator: https://jwtsecrets.com/
+    - `JWT_SECRET` - klucz tajny
+
+- Wysyłanie wiadomości e-mail:
+
+  Funkcja wysyłki wiadomości email jest opcjonalna, można ją włączyć za pomocą poniższych zmiennych.
+
+  Instrukcje dotyczące tworzenia konta email oraz pozyskania hasła dla aplikacji dla poczty Gmail:
+
+  https://support.google.com/mail/answer/56256
+
+  https://support.google.com/mail/answer/185833
+    - `SEND_EMAIL` (true/false) - zmienna służąca do włączania/wyłączania funkcjonalności wysyłki wiadomości email
+    - `FAKEFORGE_MAIL_USERNAME` - adres email, z którego aplikacja wysyła wiadomości email, konieczna w przypadku
+      włączenia funkcjonalności, w innym przypadku, może zostać nieuzupełniona
+    - `FAKEFORGE_MAIL_PASSWORD` - hasło konta email, z którego aplikacja wysyła wiadomości, konieczna w przypadku
+      włączenia funkcjonalności, w innym przypadku, może zostać nieuzupełniona
+
+- Weryfikacja adresu e-mail:
+
+  Funkcja weryfikacji adresu e-mail jest opcjonalna, można ją włączyć za pomocą poniższych zmiennych.
+
+  Instrukcja dotycząca pozyskania klucza API do weryfikacji adresu e-mail:
+
+  Należy założyć konto na stronie https://emailverification.whoisxmlapi.com/api/signup, po poprawnej rejestracji należy
+  przejść do zakładki `My products`, na górze strony widoczny jest wgenerowany klucz API, potrzebny do działania
+  funkcji.
+
+  **Ważne!** Darmowa wersja konta na stronie pozwala jednorazowo na 100 żądań sprawdzających poprawność adresu email.
+
+    - `VERIFY_EMAIL` (true/false) - zmienna służąca do włączania/wyłączania funkcjonalności wysyłki wiadomości email
+    - `MAIL_API_KEY` - klucz API pozyskany na stronie https://emailverification.whoisxmlapi.com/
 
 Aplikacja odczytuje konfigurację z pliku `src/main/resources/application.yml` i zmiennych środowiskowych.
 
@@ -81,14 +131,20 @@ Aplikacja odczytuje konfigurację z pliku `src/main/resources/application.yml` i
 1) Upewnij się, że `.env` jest skonfigurowany
 2) Uruchom stos:
 
-```
-docker compose up --build
+```bash
+docker-compose up -d --build
 ```
 
 Serwisy i porty:
 
 - Aplikacja: http://localhost:8080 (wystawiony port debugowania 5005)
 - Baza danych MySQL: localhost:3307 (wewnętrzny port kontenera 3306)
+
+By wyłączyć kontenery, uruchom
+
+```bash
+docker-compose down
+````
 
 ### Opcja B: Uruchomienie lokalne (bez Dockera)
 
@@ -102,7 +158,7 @@ Serwisy i porty:
     - Opcjonalnie: wysyłka i weryfikacja adresu email jak w Konfiguracji
 3) Uruchom aplikację
 
-```
+```bash
 ./gradlew bootRun
 ```
 
@@ -114,13 +170,13 @@ Liquibase zaaplikuje migracje podczas uruchamiania.
 
 Uruchom
 
-```
+```bash
 ./gradlew build
 ```
 
 ### Bez testów
 
-```
+```bash
 ./gradlew build -x test
 ```
 
@@ -128,7 +184,7 @@ Uruchom
 
 Uruchom
 
-```
+```bash
 ./gradlew test
 ```
 
@@ -141,55 +197,51 @@ Przykładowy schemat działania (zakładając aplikację na localhost:8080):
 
 1) Zarejestruj użytkownika
 
-```
-curl -X POST http://localhost:8080/users/register \
-  -H "Content-Type: application/json" \
-  -d '{
-        "name":"John",
-        "lastName":"Doe",
-        "emailAddress":"john.doe@example.com",
-        "password":"Str0ngP@ss"
-      }'
-```
+    ```bash
+    curl -X POST http://localhost:8080/users/register \
+      -H "Content-Type: application/json" \
+      -d '{
+            "name":"John",
+            "lastName":"Doe",
+            "emailAddress":"john.doe@example.com",
+            "password":"Str0ngP@ss"
+          }'
+    ```
 
 2) Zaloguj się by uzyskać token JWT
 
-```
-TOKEN=$(curl -s -X POST http://localhost:8080/login \
-  -H "Content-Type: application/json" \
-  -d '{"emailAddress":"john.doe@example.com","password":"Str0ngP@ss"}')
-echo $TOKEN
-```
+    ```bash
+    TOKEN=$(curl -s -X POST http://localhost:8080/login \
+      -H "Content-Type: application/json" \
+      -d '{"emailAddress":"john.doe@example.com","password":"Str0ngP@ss"}')
+    echo $TOKEN
+    ```
 
 3) Chronione endpointy
 
 - Obejrzyj wygenerowane dane użytkownika (USER role):
 
-```
-curl -H "Authorization: Bearer $TOKEN" \
-  "http://localhost:8080/users/persons?page=0&size=10"
-```
+    ```bash
+    curl -H "Authorization: Bearer $TOKEN" \
+      "http://localhost:8080/users/persons?page=0&size=10"
+    ```
 
 - Wygeneruj dane użytkownika (USER role):
 
-```
-curl -X POST -H "Authorization: Bearer $TOKEN" \
-  "http://localhost:8080/users/persons?age=30&gender=MALE"
-```
+    ```bash
+    curl -X POST -H "Authorization: Bearer $TOKEN" \
+      "http://localhost:8080/users/persons?age=30&gender=MALE"
+    ```
 
 - Sprawdź swój dzienny limit (USER role):
 
-```
-curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/users/limit
-```
+    ```bash
+    curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/users/limit
+    ```
 
 - Endpointy administracyjne:
     - List users (ADMIN role): `GET /users?page=0&size=10`
     - Edit user limit (ADMIN role): `PUT /users/{userId}/limit?dailyLimit=25`
-
-Jeśli OpenAPI UI jest włączone, będzie dostępne pod adresem:
-
-http://localhost:8080/swagger-ui/index.html
 
 ## Baza danych i migracje
 
@@ -206,6 +258,8 @@ http://localhost:8080/swagger-ui/index.html
 - Wysyłanie/weryfikacja wiadomości e-mail: ustaw `SEND_EMAIL`/`VERIFY_EMAIL` na `false`, jeśli nie podasz danych
   uwierzytelniających/interfejsów API podczas
   lokalnego tworzenia.
+
+---
 
 # English
 
@@ -232,7 +286,7 @@ DataFaker, Spock (Groovy) for tests, Docker/Docker Compose.
 
 ## Configuration
 
-1) Copy environment template and fill values:
+1) Copy the environment template and fill values:
 
 - Duplicate `.env.example` to `.env` in the project root
 - Set the variables as needed. Key ones:
@@ -252,7 +306,7 @@ The application reads configuration from `src/main/resources/application.yml` an
 1) Ensure `.env` is configured
 2) Start the stack:
 
-```
+```bash
 docker compose up --build
 ```
 
@@ -273,7 +327,7 @@ Services and ports:
     - Optionally: mail and verification variables as in Configuration
 3) Run the app:
 
-```
+```bash
 ./gradlew bootRun
 ```
 
@@ -285,7 +339,7 @@ Liquibase will apply migrations on startup.
 
 run
 
-```
+```bash
 ./gradlew build
 ```
 
@@ -293,7 +347,7 @@ run
 
 run
 
-```
+```bash
 ./gradlew build -x test
 ```
 
@@ -301,60 +355,60 @@ run
 
 run
 
-```
+```bash
 ./gradlew test
 ```
 
 ## API Overview
 
-Authentication uses JWT. Obtain a token via `/login` and send it as `Authorization: Bearer <token>` for protected
+Authentication uses JWT. Get a token via `/login` and send it as `Authorization: Bearer <token>` for protected
 endpoints.
 
 Example flow (assuming app on localhost:8080):
 
 1) Register a user
 
-```
-curl -X POST http://localhost:8080/users/register \
-  -H "Content-Type: application/json" \
-  -d '{
-        "name":"John",
-        "lastName":"Doe",
-        "emailAddress":"john.doe@example.com",
-        "password":"Str0ngP@ss"
-      }'
-```
+    ```bash
+    curl -X POST http://localhost:8080/users/register \
+      -H "Content-Type: application/json" \
+      -d '{
+            "name":"John",
+            "lastName":"Doe",
+            "emailAddress":"john.doe@example.com",
+            "password":"Str0ngP@ss"
+          }'
+    ```
 
 2) Login to receive JWT
 
-```
-TOKEN=$(curl -s -X POST http://localhost:8080/login \
-  -H "Content-Type: application/json" \
-  -d '{"emailAddress":"john.doe@example.com","password":"Str0ngP@ss"}')
-echo $TOKEN
-```
+    ```bash
+    TOKEN=$(curl -s -X POST http://localhost:8080/login \
+      -H "Content-Type: application/json" \
+      -d '{"emailAddress":"john.doe@example.com","password":"Str0ngP@ss"}')
+    echo $TOKEN
+    ```
 
 3) Use protected endpoints
 
 - Get persons (USER role):
 
-```
-curl -H "Authorization: Bearer $TOKEN" \
-  "http://localhost:8080/users/persons?page=0&size=10"
-```
+    ```bash
+    curl -H "Authorization: Bearer $TOKEN" \
+      "http://localhost:8080/users/persons?page=0&size=10"
+    ```
 
 - Create a person (USER role):
 
-```
-curl -X POST -H "Authorization: Bearer $TOKEN" \
-  "http://localhost:8080/users/persons?age=30&gender=MALE"
-```
+    ```bash
+    curl -X POST -H "Authorization: Bearer $TOKEN" \
+      "http://localhost:8080/users/persons?age=30&gender=MALE"
+    ```
 
 - Get your daily limit (USER role):
 
-```
-curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/users/limit
-```
+    ```bash
+    curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/users/limit
+    ```
 
 - Admin endpoints:
     - List users (ADMIN role): `GET /users?page=0&size=10`
