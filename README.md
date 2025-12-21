@@ -167,13 +167,13 @@ Liquibase zaaplikuje migracje podczas uruchamiania.
 Uruchom
 
 ```bash
-./gradlew build
+./gradlew clean build
 ```
 
 ### Bez testów
 
 ```bash
-./gradlew build -x test
+./gradlew clean build -x test
 ```
 
 ## Testy
@@ -181,7 +181,7 @@ Uruchom
 Uruchom
 
 ```bash
-./gradlew test
+./gradlew clean test
 ```
 
 ## Przegląd interfejsu API
