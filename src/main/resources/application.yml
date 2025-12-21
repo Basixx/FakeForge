@@ -27,8 +27,8 @@ spring:
       starttls.enable: true
       auth: true
       ssl.trust: smtp.gmail.com
-    username: ${FAKEFORGE_MAIL_USERNAME}
-    password: ${FAKEFORGE_MAIL_PASSWORD}
+    username: ${FAKEFORGE_MAIL_USERNAME:}
+    password: ${FAKEFORGE_MAIL_PASSWORD:}
 
 management:
   endpoints:
