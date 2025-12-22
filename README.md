@@ -89,6 +89,8 @@ Skopiuj szablon środowiska i wypełnij wartości:
 
   Poufny ciąg znaków używany do cyfrowego podpisywania i weryfikacji tokenów JWT. Polecany
   generator: https://jwtsecrets.com/
+
+  **Ważne!** Klucz musi być przynajmniej 256-bitowy.
     - `JWT_SECRET` - klucz tajny
 
 - Wysyłanie wiadomości e-mail:
@@ -131,6 +133,10 @@ Aplikacja odczytuje konfigurację z pliku `src/main/resources/application.yml` i
 2) Uruchom stos:
 
 ```bash
+./gradlew clean build -x test
+```
+
+```bash
 docker-compose up -d --build
 ```
 
@@ -150,7 +156,14 @@ docker-compose down
 1) Zapewnij działającą instancję MySQL i stwórz bazę danych (zgodnie z `MYSQL_DATABASE`)
 
    tutorial: https://dev.mysql.com/doc/mysql-getting-started/en/
-2) Wyeksportuj wymagane zmienne środowiskowe z pliku `.env.example`, tak by Spring mógł się do nich podłączyć.
+
+   Możliwe jest połączenie Dockerowej bazy danych z lokalnie postawioną aplikacją.
+
+    ```bash
+    docker-compose up -d --build ff-db
+    ```
+
+2) Upewnij się, że `.env` jest skonfigurowany
 
 3) Uruchom aplikację:
 
@@ -304,13 +317,15 @@ Copy the environment template and fill values:
 - JWT:
 
   A secret string used to digitally sign and verify JWT tokens. Recommended generator: https://jwtsecrets.com/
+
+  **Important!** The secret must be at least 256-bit.
     - `JWT_SECRET` - secret key
 
 - Email sending:
 
   The email sending feature is optional and can be enabled using the variables below.
 
-  Instructions for creating an email account and obtaining a password for the Gmail app:
+  Instructions for creating an email account and getting a password for the Gmail app:
 
   https://support.google.com/mail/answer/56256
 
@@ -325,7 +340,7 @@ Copy the environment template and fill values:
 
   The email verification feature is optional and can be enabled using the variables below.
 
-  Instructions for obtaining an API key for email verification:
+  Instructions for getting an API key for email verification:
 
   Create an account at https://emailverification.whoisxmlapi.com/api/signup. After successful registration, go to the
   `My Products` tab. At the top of the page, you will see the generated API key required for this feature to work.
@@ -343,6 +358,10 @@ The application reads configuration from `src/main/resources/application.yml` an
 
 1) Ensure `.env` is configured
 2) Start the stack:
+
+```bash
+./gradlew clean build -x test
+```
 
 ```bash
 docker-compose up -d --build
@@ -364,7 +383,14 @@ docker-compose down
 1) Provide a running MySQL instance and create a database (matches `MYSQL_DATABASE`)
 
    tutorial: https://dev.mysql.com/doc/mysql-getting-started/en/
-2) Export required environment variables from `.env.example` file so Spring can connect.
+
+   It's possible to connect a Docker-based MySQL database to the local application.
+
+    ```bash
+     docker-compose up -d --build ff-db
+    ``` 
+
+2) Ensure `.env` is configured
 
 3) Run the app:
 
@@ -381,7 +407,7 @@ Liquibase will apply migrations on startup.
 run
 
 ```bash
-./gradlew build
+./gradlew clean build
 ```
 
 ### Without tests
@@ -389,7 +415,7 @@ run
 run
 
 ```bash
-./gradlew build -x test
+./gradlew clean build -x test
 ```
 
 ## Tests
@@ -397,7 +423,7 @@ run
 run
 
 ```bash
-./gradlew test
+./gradlew clean test
 ```
 
 ## API Overview
