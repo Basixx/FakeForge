@@ -127,6 +127,8 @@ Aplikacja odczytuje konfigurację z pliku `src/main/resources/application.yml` i
 
 ## Uruchomienie
 
+**Ważne!** Wykonuj komendy w katalogu projektu.
+
 ### Opcja A: Docker Compose (zalecana)
 
 1) Upewnij się, że `.env` jest skonfigurowany
@@ -175,6 +177,8 @@ Liquibase zaaplikuje migracje podczas uruchamiania.
 
 ## Kompilacja
 
+**Ważne!** Wykonuj komendy w katalogu projektu.
+
 ### Z testami
 
 Uruchom
@@ -190,6 +194,8 @@ Uruchom
 ```
 
 ## Testy
+
+**Ważne!** Wykonuj komendy w katalogu projektu.
 
 Uruchom
 
@@ -354,6 +360,8 @@ The application reads configuration from `src/main/resources/application.yml` an
 
 ## Run
 
+**Important!** Run commands in the project root directory.
+
 ### Option A: Docker Compose (recommended)
 
 1) Ensure `.env` is configured
@@ -402,6 +410,8 @@ Liquibase will apply migrations on startup.
 
 ## Build
 
+**Important!** Run commands in the project root directory.
+
 ### With tests
 
 run
@@ -419,6 +429,8 @@ run
 ```
 
 ## Tests
+
+**Important!** Run commands in the project root directory.
 
 run
 
